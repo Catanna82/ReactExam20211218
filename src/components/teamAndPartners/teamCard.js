@@ -4,7 +4,7 @@ const TeamCard = (props) => {
             <figure className="effect-chico">
                 <img src={props.imgUrl} alt="img01" className="img-responsive" />
                 <figcaption>
-                    <p><b>{props.name}</b><br />{props.profesion}<br /><br /><a href="#"><i className="fa fa-dribbble"></i></a> <a href="#"><i className="fa fa-facebook"></i></a> <a href="#"><i className="fa fa-twitter"></i></a></p>
+                    <p><b>{props.name}</b><br />{props.profesion}<br /><br /><a href={props.instagram}><i className="fa fa-instagram"></i></a> <a href={props.facebook}><i className="fa fa-facebook"></i></a></p>
                 </figcaption>
             </figure>
         </div>

@@ -3,7 +3,7 @@ import PartnersCard from "./PartnersCard";
 
 function Partners() {
     return (
-        <div id="partners" className="container spacer ">
+        <div id="partners" className="container spacer over">
             <h2 className="text-center  wowload fadeInUp">Вашето мнение за нашата работа</h2>
             <div className="clearfix">
                 <div className="col-sm-6 partners  wowload fadeInLeft">
@@ -50,6 +50,8 @@ function Partners() {
                     imgUrl="images/team/team1.jpg"
                     name="Жан Тодоров"
                     profesion="Фотограф"
+                    instagram="https://www.instagram.com/jantodorov/"
+                    facebook="https://www.facebook.com/profile.php?id=100000501595428"
                 />
                 <TeamCard
                     imgUrl="images/team/team2.jpg"

@@ -16,6 +16,10 @@
 	cursor: pointer;
 }
 
+.highlight-info {
+	margin-top: 20px;
+}
+
 .grid figure img {
 	position: relative;
 	display: block;

@@ -5,6 +5,10 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
+.logo {
+	padding-top: 10px;
+}
+
 a {
 	color: #00a9c6;
 	text-decoration: none;
@@ -58,9 +62,9 @@ p {
 	line-height: 1.7em;
 	margin-bottom: 1.7em;
 }
-
+/* here */
 .spacer {
-	padding: 6em 0;
+	padding: 3.5em 0;
 }
 
 .btn {
@@ -426,6 +430,7 @@ p {
 	.highlight-info .overlay {
 		padding-bottom: 2em;
 	}
+
 	.grid.team div {
 		margin: 0;
 		padding: 0;

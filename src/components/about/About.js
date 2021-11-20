@@ -35,23 +35,23 @@ export default function About() {
                 <ul className="row text-center list-inline  wowload bounceInUp">
                     <AboutServices
                         className="fa fa-camera-retro"
-                        title="Photography"
+                        title="Фото албуми"
                     />
                     <AboutServices
                         className="fa fa-graduation-cap"
-                        title="Studio"
+                        title="Студио"
                     />
                     <AboutServices
-                        className="fa fa-cube"
-                        title="Trainings"
+                        className=" fa fas fa-download"
+                        title="Изтегли албум"
                     />
                     <AboutServices
                         className="fa fa-umbrella"
-                        title="Travel"
+                        title="Пътувания"
                     />
                     <AboutServices
                         className="fa fa-heart-o"
-                        title="Wedding"
+                        title="Бъдещи проекти"
                     />
                 </ul>
             </div>
