@@ -2,8 +2,7 @@ const URL = 'http://localhost:3030';
 
 const getFetch = (uri) => {
     return fetch(URL + uri)
-    .then(r => r.json())
-
+        .then(r => r.json())
 };
 
 const postFetch = (uri, input) => {

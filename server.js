@@ -44,8 +44,8 @@ const UserSchema = new Schema({
 }, { versionKey: false });
 
 const CommentsSchema = new Schema({
-    email: { type: String },
-    name: { type: String },
+    userID: {type: String},
+    date: {type: Date},
     msg: { type: String },
 }, { versionKey: false });
 
@@ -113,16 +113,21 @@ app.post('/api/saveComment', function (req, res) {
     });
 });
 
+app.get('/api/loadComment/:userID', function (req, res) {
+    commentsModel.find({userID : req.params.userID}, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(data);
+        }
+    });
+});
 app.get('/api/loadComment', function (req, res) {
     commentsModel.find({}, function (err, data) {
         if (err) {
             res.send(err);
         } else {
-            const result = [
-                {},
-                {}
-            ];
-            res.send(result);
+            res.send(data);
         }
     });
 });

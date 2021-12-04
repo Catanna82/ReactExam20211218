@@ -1,17 +1,23 @@
-import { useState } from 'react';
+import { format as formatDate } from 'date-fns'
+import { useEffect, useContext, useState } from 'react';
 import Logo from '../Logo/Logo';
 import './addComment.css';
 import AddCommentRow from './AddCommentRow';
 import { Redirect } from 'react-router';
-import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 
-const AddComment = ({ postFetch }) => {
+const AddComment = ({ getFetch, postFetch }) => {
     const [input, setInput] = useState({
         msg: '',
-        name: '',
-        email: ''
     });
+    const load = async () => {
+        const data = await getFetch('/api/loadComment');
+        setComments(data);
+    }
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => load(), []);
+
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
 
@@ -22,48 +28,36 @@ const AddComment = ({ postFetch }) => {
             };
         });
     };
-    const onClickHandler = (e) => {
+    const onClickHandler = async (e) => {
         e.preventDefault();
-        postFetch('/api/saveComment', input);
+        await postFetch('/api/saveComment', { ...input, userID, date: Date.now() });
+        load();
+        setInput({ msg: '' });
     };
     const { user: {
         userID
-    }} = useContext(AuthContext);
+    } } = useContext(AuthContext);
     return userID ? (
         <>
             <Logo />
-            <section className='comp-cont'>
+            <section className='add-comp-cont'>
                 <div className='container'>
                     <div className='row'>
                         <div className='col-sm-5 col-md-6 col-12 pb-4'>
-                            <AddCommentRow
-                                className='comment mt-4 text-justify float-left'
-                                name='Krasimir Kolev'
-                                img='https://i.imgur.com/yTFUilP.jpg'
-                                date='- 20 October, 2018'
-                                text='Lorem ipsum dolor sit, amet consectetur adipisicing elit.'
-                            />
-                            <AddCommentRow
-                                className='text-justify darker mt-4 float-right'
-                                name='Anna Todorova'
-                                img='https://i.imgur.com/CFpa3nK.jpg'
-                                date='- 28 October, 2021'
-                                text='Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?'
-                            />
-                            <AddCommentRow
-                                className='comment mt-4 text-justify'
-                                name='Jan Todorov'
-                                img='https://i.imgur.com/yTFUilP.jpg'
-                                date='- 20 October, 2018'
-                                text='Lorem ipsum dolor sit, amet consectetur adipisicing elit.'
-                            />
-                            <AddCommentRow
-                                className='darker mt-4 text-justify'
-                                name="Plamena Todorova"
-                                img='https://i.imgur.com/CFpa3nK.jpg'
-                                date='- 20 October, 2018'
-                                text='Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?'
-                            />
+                            {comments.map(({ date, msg, userID, _id }, i) => {
+                                const style = (i % 2 === 0 && 'comment mt-4 text-justify float-left') ||
+                                    'text-justify darker mt-4 float-right';
+                                return (
+                                    < AddCommentRow
+                                        key={_id}
+                                        className={style}
+                                        name={userID}
+                                        img='https://i.imgur.com/yTFUilP.jpg'
+                                        date={formatDate(new Date(date), 'dd/MM/yyyy')}
+                                        text={msg}
+                                    />
+                                );
+                            })}
                         </div>
                         <div className='col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4'>
                             <form id='algin-form' className='comment-form'>
@@ -71,13 +65,6 @@ const AddComment = ({ postFetch }) => {
                                     <h4 className='comment-h4 comment-h4-center'>Оставете коментар</h4>
                                     <label className='comment-form-label' htmlFor='message'>Коментар</label>
                                     <textarea onChange={onChangeHandler} value={input.msg} name='msg' id='' cols='30' rows='5' className='form-control text-comment' />
-                                </div>
-                                <div className='form-group'>
-                                    <label className='comment-form-label' htmlFor='name'>Име</label>
-                                    <input onChange={onChangeHandler} value={input.name} type='text' name='name' id='fullname' className='form-control' />
-                                </div>
-                                <div className='form-group'>
-                                    <label className='comment-form-label' htmlFor='email'>Електронна поща</label> <input onChange={onChangeHandler} value={input.email} type='text' name='email' id='email' className='form-control' />
                                 </div>
                                 <div className='form-group'>
                                     <button onClick={onClickHandler} type='button' id='post' className='comment-btn'>Post Comment</button>
@@ -89,7 +76,7 @@ const AddComment = ({ postFetch }) => {
             </section>
         </>
     )
-    : <Redirect to='/' />
+        : <Redirect to='/' />
 }
 
 export default AddComment;

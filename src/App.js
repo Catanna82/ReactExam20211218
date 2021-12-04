@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
-import { postFetch } from './services/dbServices';
+import { getFetch, postFetch } from './services/dbServices';
 // import { useState } from 'react';
 
 import Header from './components/Header/Header';
@@ -104,11 +104,11 @@ function App() {
             <Footer />
           </Route>
           <Route path='/myComments'>
-            <MyComments />
+            <MyComments postFetch={postFetch} getFetch={getFetch}/>
             <Footer />
           </Route>
           <Route path='/add'>
-            <AddComment postFetch={postFetch} />
+            <AddComment postFetch={postFetch} getFetch={getFetch} />
             <Footer />
           </Route>
           <Route path='/*' component={ErrorPage} />
