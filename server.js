@@ -4,7 +4,7 @@ const mongo = require('mongoose');
 
 (function connect() {
     return new Promise((resolve, reject) => {
-        mongo.connect('mongodb://localhost:27017/JT', {
+        mongo.connect('mongodb+srv://Catanna:jacoepi4@cluster0.bev5u.mongodb.net/JTStudioDB?retryWrites=true&w=majority', {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
@@ -27,7 +27,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
 
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -37,6 +37,7 @@ app.use(function (req, res, next) {
 const Schema = mongo.Schema;
 
 const UserSchema = new Schema({
+    name: { type: String },
     email: { type: String },
     password: { type: String },
     admin: { type: Boolean }
@@ -44,7 +45,8 @@ const UserSchema = new Schema({
 
 const CommentsSchema = new Schema({
     email: { type: String },
-    description: { type: String },
+    name: { type: String },
+    msg: { type: String },
 }, { versionKey: false });
 
 const AlbumsSchema = new Schema({
@@ -95,7 +97,7 @@ app.post('/api/login', function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            res.send(data[0]);
+            res.send({userID: data[0]._id, isAdmin: data[0].admin});
         }
     });
 });
@@ -116,7 +118,11 @@ app.get('/api/loadComment', function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            res.send(data);
+            const result = [
+                {},
+                {}
+            ];
+            res.send(result);
         }
     });
 });

@@ -1,5 +1,10 @@
+.body {
+    background-color: black;
+}
 .error-page {
     background-color: black;
+    width: 56%;
+    margin-left: 22%;
 }
 
 .error-img {

@@ -71,7 +71,7 @@ button {
     top: 0;
     width: 900px;
     height: 100%;
-    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/sections-3.jpg');
+    background-image: url('login1.jpg');
     background-size: cover;
     transition: transform 1.2s ease-in-out;
 }
@@ -119,7 +119,7 @@ button {
     overflow: hidden;
     z-index: 2;
     position: relative;
-    width: 100px;
+    width: 120px;
     height: 36px;
     margin: 0 auto;
     background: transparent;
@@ -175,7 +175,7 @@ label span {
     color: #cfcfcf;
     text-transform: uppercase;
 }
-input {
+.login-input {
     display: block;
     width: 100%;
     margin-top: 5px;
@@ -232,4 +232,8 @@ input {
 .icon-link--twitter {
     left: auto;
     right: 5px;
+}
+
+.cont {
+    margin-top: 33px;
 }
