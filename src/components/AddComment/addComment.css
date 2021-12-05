@@ -1,4 +1,3 @@
-
 @media(min-width:568px) {
     .end {
         margin-left: auto
@@ -9,6 +8,7 @@
     #post {
         width: 100%
     }
+
     #post {
         background-color: white;
         color: white;
@@ -17,7 +17,7 @@
 
 .add-comp-cont {
     margin-top: 100px;
-    margin-bottom: 192px;
+    margin-bottom: 169px;
 }
 
 #clicked {
@@ -62,29 +62,41 @@
 .com-cont {
     margin-top: 100px
 }
+
 .comments {
     margin-top: 5%;
     margin-left: 20px
 }
 
-.darker {
+.add-darker {
     border: 1px solid #ecb21f;
     background-color: black;
     float: right;
     border-radius: 5px;
-    padding-left: 40px;
-    padding-right: 30px;
-    padding-top: 10px
+    padding: 20px;
+    width: 555px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.comment {
+.add-comment {
     border: 1px solid rgba(16, 46, 46, 1);
     background-color: rgba(16, 46, 46, 0.973);
     float: left;
     border-radius: 5px;
-    padding-left: 40px;
-    padding-right: 30px;
-    padding-top: 10px
+    padding: 20px;
+    width: 555px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.comment-flex {
+    display: flex;
+    flex-direction: column;
 }
 
 .comment h4,
@@ -98,7 +110,16 @@
 .comment span,
 .darker p,
 .darker span {
-    color: rgb(184, 183, 183)
+    color: rgb(236, 227, 227)
+}
+
+.comment-span {
+    padding-left: 20px;
+    padding-top: 15px;
+}
+.comment-p {
+    padding-left: 20px;
+    padding-top: 20px;
 }
 
 .comment-h4 {
@@ -107,10 +128,15 @@
     line-height: 1.2;
     margin-left: 15px;
     font: revert;
+    padding-top: 15px;
 }
 
 .comment-h4-center {
     text-align: center;
+}
+
+.comment-span, .comment-p {
+    color: rgb(212, 208, 208);
 }
 
 .text-comment {

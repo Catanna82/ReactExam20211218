@@ -41,7 +41,7 @@ export default function About() {
                     <AboutServices
                         className='fa fa-graduation-cap'
                         title='Студио'
-                        url='#'
+                        url='/studio'
                     />
                     <AboutServices
                         className=' fa fas fa-download'

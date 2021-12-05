@@ -43,10 +43,10 @@ const AddComment = ({ getFetch, postFetch }) => {
             <section className='add-comp-cont'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-sm-5 col-md-6 col-12 pb-4'>
+                        <div className='col-sm-5 col-md-6 col-12 pb-4 comment-flex'>
                             {comments.map(({ date, msg, userID, _id }, i) => {
-                                const style = (i % 2 === 0 && 'comment mt-4 text-justify float-left') ||
-                                    'text-justify darker mt-4 float-right';
+                                const style = (i % 2 === 0 && 'add-comment mt-4 text-justify float-left') ||
+                                    'text-justify add-darker mt-4 float-right';
                                 return (
                                     < AddCommentRow
                                         key={_id}

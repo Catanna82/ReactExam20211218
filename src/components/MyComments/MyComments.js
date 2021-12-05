@@ -1,9 +1,8 @@
 import Logo from '../Logo/Logo';
-import './addComment.css';
 import MyCommentRow from './MyCommentRow';
 import { format as formatDate } from 'date-fns'
 import { useEffect, useContext, useState } from 'react';
-import './addComment.css';
+import './myComment.css';
 import { Redirect } from 'react-router';
 import AuthContext from '../../contexts/AuthContext';
 
@@ -43,13 +42,13 @@ const MyComments = ({ getFetch, postFetch }) => {
     return userID ? (
         <>
             <Logo />
-            <section className='add-comp-cont'>
+            <section className='my-comp-cont'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-sm-5 col-md-6 col-12 pb-4'>
+                        <div className='col-sm-5 col-md-6 col-12 pb-4 my-comment-flex'>
                             {comments.map(({ date, msg, userID, _id }, i) => {
-                                const style = (i % 2 === 0 && 'comment mt-4 text-justify float-left') ||
-                                    'text-justify darker mt-4 float-right';
+                                const style = (i % 2 === 0 && 'my-comment mt-4 text-justify float-left') ||
+                                    'text-justify my-darker mt-4 float-right';
                                 return (
                                     < MyCommentRow
                                         key={_id}
@@ -62,7 +61,7 @@ const MyComments = ({ getFetch, postFetch }) => {
                                 );
                             })}
                         </div>
-                        <div className='col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4'>
+                        <div className='col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4 my-comment-form'>
                             <form id='algin-form' className='comment-form'>
                                 <div className='form-group'>
                                     <h4 className='comment-h4 comment-h4-center'>Оставете коментар</h4>

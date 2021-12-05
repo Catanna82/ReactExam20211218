@@ -27,6 +27,7 @@ import UserPhotosDownload from './components/UserPhotosDownload/UserPhotosDownlo
 import EditComments from './components/EditComments/EditComments';
 import Logo from './components/Logo/Logo';
 import MyComments from './components/MyComments/MyComments'
+import Studio from './components/Studio/Studio';
 
 const initialAuthState = {
   userId: null,
@@ -97,6 +98,10 @@ function App() {
           </Route>
           <Route path='/edit'>
             <EditPage />
+            <Footer />
+          </Route>
+          <Route path='/studio'>
+            <Studio />
             <Footer />
           </Route>
           <Route path='/editComment'>
