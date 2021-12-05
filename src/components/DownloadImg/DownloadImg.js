@@ -1,6 +1,13 @@
 import './downloadImgStyle.css';
+import { useContext } from 'react';
+import { Redirect } from 'react-router';
+import AuthContext from '../../contexts/AuthContext';
+
 const UploadImg = () => {
-    return (
+    const { user: {
+        userID
+    } } = useContext(AuthContext);
+    return userID ? (
         <section className='user-download-gallery'>
             <h2> За да изтеглите снимка кликнете върху нея! </h2>
             <ul className='user-download-gallery-ul'>
@@ -107,6 +114,7 @@ const UploadImg = () => {
                
             </ul>
         </section>
-    );
+    )
+    : <Redirect to='/' />
 }
 export default UploadImg;

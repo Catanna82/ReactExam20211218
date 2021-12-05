@@ -1,7 +1,13 @@
+import { useContext } from 'react';
+import { Redirect } from 'react-router';
+import AuthContext from '../../contexts/AuthContext';
 import Logo from '../Logo/Logo';
 import './editPageStyle.css';
 const EditPage = () => {
-    return (
+    const { user: {
+        userID
+    } } = useContext(AuthContext);
+    return userID ? (
         <>
             <Logo />
             <section id='edit-page' className='auth-container'>
@@ -33,7 +39,8 @@ const EditPage = () => {
                 </form>
             </section>
         </>
-    );
+    )
+        : <Redirect to='/' />
 }
 
 export default EditPage;

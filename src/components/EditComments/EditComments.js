@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { Redirect } from 'react-router';
+import AuthContext from '../../contexts/AuthContext';
 import Logo from '../Logo/Logo';
 import './editComments.css';
 
@@ -22,7 +24,10 @@ const EditComments = ({ postFetch }) => {
         e.preventDefault();
         postFetch('/api/saveComment', input);
     };
-    return (
+    const { user: {
+        userID
+    } } = useContext(AuthContext);
+    return userID ? (
         <>
             <Logo />
             <section className='comp-cont'>
@@ -51,7 +56,8 @@ const EditComments = ({ postFetch }) => {
                 </div>
             </section>
         </>
-    );
+    )
+        : <Redirect to='/' />
 }
 
 export default EditComments;

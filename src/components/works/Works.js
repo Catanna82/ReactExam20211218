@@ -2,7 +2,7 @@ import WorkCards from './WorksCards';
 
 export default function Works() {
     return (
-        <div id='works' className=' clearfix grid'>
+        <div id='works' className=' clearfix grid pointer-img'>
             <WorkCards
                 img='images/portfolio/1.jpg'
                 title='Природа'

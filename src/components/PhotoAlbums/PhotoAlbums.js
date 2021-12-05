@@ -1,9 +1,15 @@
+import { useContext } from 'react';
+import { Redirect } from 'react-router';
+import AuthContext from '../../contexts/AuthContext';
 import Logo from "../Logo/Logo";
 import AlbumCard from "./PhotoAlbumCard";
 import './photoAlbums.css';
 
 const PhotoAlbums = () => {
-    return (
+    const { user: {
+        userID
+    } } = useContext(AuthContext);
+    return userID ? (
         <div className='photo-albums'>
             < Logo />
             <h1 className="album-title"> Photo Albums</h1>
@@ -30,7 +36,8 @@ const PhotoAlbums = () => {
                 <AlbumCard imgUrl='images/back5.jpg' />
             </div>
         </div>
-    );
+    )
+    : <Redirect to='/' />
 }
 
 export default PhotoAlbums;

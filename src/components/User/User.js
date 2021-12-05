@@ -1,8 +1,14 @@
+import { useContext } from 'react';
+import { Redirect } from 'react-router';
+import AuthContext from '../../contexts/AuthContext';
 import Logo from '../Logo/Logo';
 import './userStyle.css'
 
 const User = () => {
-    return (
+    const { user: {
+        userID
+    } } = useContext(AuthContext);
+    return userID ? (
         <>
             <Logo />
             <div className='user-page'>
@@ -82,7 +88,8 @@ const User = () => {
                 </aside>
             </div>
         </>
-    );
+    )
+    : <Redirect to='/' />
 }
 
 export default User;

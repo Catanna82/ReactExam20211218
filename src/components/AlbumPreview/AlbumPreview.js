@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import Logo from '../Logo/Logo';
 import './albumPreviewStyle.css';
-
+import { useContext } from 'react';
+import { Redirect } from 'react-router';
+import AuthContext from '../../contexts/AuthContext';
 
 const AlbumPreview = () => {
     const Thumbnail = ({ arr, image, index }) => {
@@ -60,7 +62,10 @@ const AlbumPreview = () => {
         )
     }
 
-    return (
+    const { user: {
+        userID
+    } } = useContext(AuthContext);
+    return userID ? (
         <div className='slide-show'>
             <h1 className='slide-show-title'>SlideShow</h1>
             <Slideshow
@@ -75,7 +80,8 @@ const AlbumPreview = () => {
                 ]}
             />
         </div>
-    );
+    )
+    : <Redirect to='/' />
 }
 
 export default AlbumPreview;

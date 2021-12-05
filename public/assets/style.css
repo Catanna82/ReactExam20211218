@@ -6,6 +6,7 @@ body {
 
 .logo {
 	padding-top: 10px;
+	pointer-events: none;
 }
 
 a {

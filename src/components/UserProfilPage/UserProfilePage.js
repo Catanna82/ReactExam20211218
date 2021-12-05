@@ -1,7 +1,13 @@
+import { useContext } from 'react';
+import { Redirect } from 'react-router';
+import AuthContext from '../../contexts/AuthContext';
 import Logo from '../Logo/Logo';
 import './userProfileStyle.css';
 const UserProfilPage = () => {
-    return (
+    const { user: {
+        userID
+    } } = useContext(AuthContext);
+    return userID ? (
         <>
             <Logo />
             <div className='container admin-user-profile-container'>
@@ -50,7 +56,8 @@ const UserProfilPage = () => {
                 </div>
             </div>
         </>
-    );
+    )
+    : <Redirect to='/' />
 }
 
 export default UserProfilPage;
