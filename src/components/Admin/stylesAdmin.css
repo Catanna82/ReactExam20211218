@@ -71,7 +71,7 @@ aside a {
     align-self: center;
 }
 
-form.login, form.register, form.admin {
+form.login, form.register, div.admin {
     width: 40%;
     margin: 2em auto 0;
     text-align: center;

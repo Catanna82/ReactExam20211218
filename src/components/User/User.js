@@ -16,7 +16,7 @@ const User = () => {
                     <div className='container user-profile-container'>
                         <div className='user-profile-main'>
                             <div className='user-profile-main-topbar'>
-                                <a className='user-profile-main-topbar-a' href='/logout'>Изход</a>
+                                <a className='user-profile-main-topbar-a' href='/'>Изход</a>
                             </div>
                         </div>
                         <div className='user-profile-row'>

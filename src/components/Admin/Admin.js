@@ -17,7 +17,7 @@ const Admin = () => {
                 <div className='admin-page'>
                     <main className='admin-page-main'>
                         <div className='admin-page-main-container-upload'>
-                            <form id='admin-form' className='admin' action='' method='POST'>
+                            <div id='admin-form' className='admin' action='' method='POST'>
                                 <div className='flex'>
                                     <div className='flex'>
                                         <p>
@@ -48,8 +48,7 @@ const Admin = () => {
                                     <button className='admin-btn' >Отхвърли</button>
                                     <button className='admin-btn' >Запази</button>
                                 </div>
-
-                            </form>
+                            </div>
                         </div>
                     </main>
                     <aside className='admin-page-aside'>
