@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-
+import './headerStyle.css';
 export default function Header() {
     const { user: {
         userID,
@@ -29,6 +29,7 @@ export default function Header() {
                                 {/* < li ><Link to='/comments' >Коментари</Link></li>  */}
                                 {userID && < li ><Link to='/add' >Добави коментар</Link></li>}
                                 {userID && isAdmin && < li ><Link to='/admin' >Админ панел</Link></li>}
+                                {userID && isAdmin && < li ><Link to='/messages' ><i className='far fa-envelope header-i'></i></Link></li>}
                                 {userID && !isAdmin && < li ><Link to='/user' >My space</Link></li>}
                                 {userID && < li ><Link to='/' onClick={logout}>Изход</Link></li>}
                             </ul>

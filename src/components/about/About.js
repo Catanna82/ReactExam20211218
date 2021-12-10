@@ -16,7 +16,7 @@ export default function About() {
                         За мен фотографията е щуро пътуване свързано с емоции и луд купон.
                         Обичам също да създавам художествени снимки и
                         портретни фотографии,
-                        които да сложите в рамка и да споделите с приятели и близки.'
+                        които да сложите в рамка и да споделите с близки и приятели.'
                     />
                 </div>
                 <div className='col-sm-6 wowload fadeInRight'>
@@ -47,16 +47,6 @@ export default function About() {
                         className=' fa fas fa-download'
                         title='Изтегли албум'
                         url='/userPhotosDownload'
-                    />
-                    <AboutServices
-                        className='fa fa-umbrella'
-                        title='Пътувания'
-                        url='#'
-                    />
-                    <AboutServices
-                        className='fa fa-heart-o'
-                        title='Бъдещи проекти'
-                        url='#'
                     />
                 </ul>
             </div>

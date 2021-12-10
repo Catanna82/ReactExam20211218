@@ -62,7 +62,7 @@ const MyComments = ({ getFetch, postFetch }) => {
                             })}
                         </div>
                         <div className='col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4 my-comment-form'>
-                            <form id='algin-form' className='comment-form'>
+                            <form id='algin-form' className='my-comment-form'>
                                 <div className='form-group'>
                                     <h4 className='comment-h4 comment-h4-center'>Оставете коментар</h4>
                                     <label className='comment-form-label' htmlFor='message'>Коментар</label>
