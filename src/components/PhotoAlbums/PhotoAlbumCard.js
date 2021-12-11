@@ -1,12 +1,16 @@
-const AlbumCard = ({ imgUrl }) => {
+import styles from './photoAlbums.module.css';
+const AlbumCard = ({ img }) => {
     return (
-        <div className='one-fifth'>
-            <p>
-                <a title='Caption Text' href='#' className='portfolio-item-preview'>
-                    <img src={imgUrl} alt='' className='portfolio-img pretty-box' />
-                </a>
-            </p>
-        </div>
+        <li className={styles['gallery-li']}>
+            <img src={img} alt='' className={styles['gallery-card-img']} />
+        </li>
+        // <div className='one-fifth'>
+        //     <p>
+        //         <a title='Caption Text' href='#' className='portfolio-item-preview' >
+        //             <img src={img} alt='' className='portfolio-img pretty-box' />
+        //         </a>
+        //     </p>
+        // </div>
     );
 }
 

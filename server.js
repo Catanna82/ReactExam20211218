@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongo = require('mongoose');
+const dbox = require('dropbox');
+const dbx = new dbox.Dropbox({ accessToken: '4jQ0LLOKtgwAAAAAAAAAAU_NyMgE15XWXB8vyI_dwyMt8QcAU1IviNR9a_TqlXQt' });
+const uuid = require('uuid').v4;
 
 (function connect() {
     return new Promise((resolve, reject) => {
@@ -44,15 +47,16 @@ const UserSchema = new Schema({
 }, { versionKey: false });
 
 const CommentsSchema = new Schema({
-    userID: {type: String},
-    date: {type: Date},
+    userID: { type: String },
+    date: { type: Date },
     msg: { type: String },
 }, { versionKey: false });
 
 const AlbumsSchema = new Schema({
     albumName: { type: String },
     category: { type: String },
-    images: { type: Array }
+    images: { type: Array },
+    userID: { type: String }
 }, { versionKey: false });
 
 const albumsModel = mongo.model('albums', AlbumsSchema, 'albums');
@@ -70,7 +74,7 @@ app.post('/api/SaveUser', function (req, res) {
             } else {
                 admin = false;
             }
-            const mod = new model({...req.body, admin});
+            const mod = new model({ ...req.body, admin });
             mod.save(function (err, data) {
                 if (err) {
                     res.send(err);
@@ -97,7 +101,7 @@ app.post('/api/login', function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            res.send({userID: data[0]._id, isAdmin: data[0].admin});
+            res.send({ userID: data[0]._id, isAdmin: data[0].admin });
         }
     });
 });
@@ -113,8 +117,18 @@ app.post('/api/saveComment', function (req, res) {
     });
 });
 
+app.get('/api/loadUsers', function (req, res) {
+    model.find({}, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(data.map(({ _id, name }) => ({ userID: _id, name })));
+        }
+    });
+});
+
 app.get('/api/loadComment/:userID', function (req, res) {
-    commentsModel.find({userID : req.params.userID}, function (err, data) {
+    commentsModel.find({ userID: req.params.userID }, function (err, data) {
         if (err) {
             res.send(err);
         } else {
@@ -158,11 +172,20 @@ app.get('/api/loadImages', function (req, res) {
 });
 
 app.get('/api/loadAlbums', function (req, res) {
-    albumsModel.find({}, function (err, data) {
+    albumsModel.find({}, async function (err, data) {
         if (err) {
             res.send(err);
         } else {
-            res.send(data.map((a) => a.albumName));
+            const albums = await data.map(async(a) => {
+                const img = a.images[0];
+                const file = await dbx.filesDownload({path: '/' + img});
+                return {
+                    img: file.result.fileBinary.toString(),
+                    albumID: a._id
+                };
+            })
+            const returnData = await Promise.all(albums);
+            res.send(returnData);
         }
     });
 });
@@ -178,13 +201,20 @@ app.get(`/api/loadAlbums/:albumName`, function (req, res) {
 });
 
 app.post('/api/saveAlbums', function (req, res) {
-    const mod = new albumsModel(req.body);
-    albumsModel.find({ albumName: req.body.albumName }, function (err, data) {
+    albumsModel.find({ albumName: req.body.albumName }, async function (err, data) {
         if (err) {
             res.send(err);
         } else {
             if (data.length === 0) {
-                mod.save(function (err, data) {
+                const fileNames = await req.body.images.reduce(async (acc, curr) => {
+                    const accAwaited = await acc;
+                    const fileName = uuid();
+                    await dbx.filesUpload({ path: '/' + fileName, contents: curr });
+                    accAwaited.push(fileName);
+                    return accAwaited;
+                }, []);
+                const dataMod = new albumsModel({ ...req.body, images: fileNames });
+                dataMod.save(function (err, data) {
                     if (err) {
                         res.send(err);
                     } else {

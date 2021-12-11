@@ -69,7 +69,7 @@ function App() {
             <Footer />
           </Route>
           <Route path='/albums'>
-            <PhotoAlbums />
+            <PhotoAlbums getFetch={getFetch} />
             <Footer />
           </Route>
           <Route path='/album'>
@@ -82,7 +82,7 @@ function App() {
             <Footer />
           </Route>
           <Route path='/admin'>
-            <Admin />
+            <Admin postFetch={postFetch} getFetch={getFetch}/>
             <Footer />
           </Route>
           <Route path='/messages'>

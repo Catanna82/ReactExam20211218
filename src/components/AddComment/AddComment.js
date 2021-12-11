@@ -67,7 +67,7 @@ const AddComment = ({ getFetch, postFetch }) => {
                                     <textarea onChange={onChangeHandler} value={input.msg} name='msg' id='' cols='30' rows='5' className='form-control text-comment' />
                                 </div>
                                 <div className='form-group'>
-                                    <button onClick={onClickHandler} type='button' id='post' className='comment-btn'>Post Comment</button>
+                                    <button onClick={onClickHandler} type='button' id='post' className='comment-btn'>Публикувай</button>
                                 </div>
                             </form>
                         </div>

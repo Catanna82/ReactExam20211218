@@ -51,6 +51,10 @@
     border-radius: 13px;
     width: 50%
 }
+.user-author-btn {
+    display: flex;
+    flex-direction: row;
+}
 
 .edit-btn {
 padding: 0 10px;
@@ -90,7 +94,7 @@ padding: 0 10px;
 
 .add-comment {
     border: 1px solid rgba(16, 46, 46, 1);
-    background-color: rgba(16, 46, 46, 0.973);
+    background-color: #7c7151;
     float: left;
     border-radius: 5px;
     padding: 20px;
@@ -127,6 +131,7 @@ padding: 0 10px;
 .comment-p {
     padding-left: 20px;
     padding-top: 20px;
+    width: 100%;
 }
 
 .comment-h4 {
@@ -176,12 +181,13 @@ padding: 0 10px;
 .form-group textarea {
     background-color: black;
     border: 1px solid rgba(16, 46, 46, 1);
-    border-radius: 12px
+    border-radius: 12px;
+    color: blanchedalmond;
 }
 
-.comment-form {
+.add-comment-form {
     border: 1px solid rgba(16, 46, 46, 1);
-    background-color: rgba(16, 46, 46, 0.973);
+    background-color: #7c7151;
     border-radius: 5px;
     padding: 20px
 }

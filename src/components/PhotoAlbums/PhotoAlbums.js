@@ -1,43 +1,45 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
 import AuthContext from '../../contexts/AuthContext';
 import Logo from "../Logo/Logo";
 import AlbumCard from "./PhotoAlbumCard";
-import './photoAlbums.css';
+import styles from './photoAlbums.module.css';
 
-const PhotoAlbums = () => {
+const PhotoAlbums = ({ getFetch }) => {
+
+    const [albums, setAlbums] = useState([]);
+
+    const loadAlbums = async () => {
+        const data = await getFetch('/api/loadAlbums');
+        setAlbums(data);
+    }
+
+    useEffect(() => loadAlbums(), [])
+
     const { user: {
         userID
     } } = useContext(AuthContext);
     return userID ? (
-        <div className='photo-albums'>
+        <>
             < Logo />
-            <h1 className="album-title"> Photo Albums</h1>
-            <div id="photo-container">
-                <AlbumCard imgUrl='images/back1.jpg' />
-                <AlbumCard imgUrl='images/back2.jpg' />
-                <AlbumCard imgUrl='images/back3.jpg' />
-                <AlbumCard imgUrl='images/back4.jpg' />
-                <AlbumCard imgUrl='images/back5.jpg' />
-                <AlbumCard imgUrl='images/back1.jpg' />
-                <AlbumCard imgUrl='images/back2.jpg' />
-                <AlbumCard imgUrl='images/back3.jpg' />
-                <AlbumCard imgUrl='images/back4.jpg' />
-                <AlbumCard imgUrl='images/back5.jpg' />
-                <AlbumCard imgUrl='images/back1.jpg' />
-                <AlbumCard imgUrl='images/back2.jpg' />
-                <AlbumCard imgUrl='images/back3.jpg' />
-                <AlbumCard imgUrl='images/back4.jpg' />
-                <AlbumCard imgUrl='images/back5.jpg' />
-                <AlbumCard imgUrl='images/back1.jpg' />
-                <AlbumCard imgUrl='images/back2.jpg' />
-                <AlbumCard imgUrl='images/back3.jpg' />
-                <AlbumCard imgUrl='images/back4.jpg' />
-                <AlbumCard imgUrl='images/back5.jpg' />
-            </div>
+        <div className={styles['photo-albums']}>
+            <h1 className={styles['album-title']}> Photo Albums</h1>
+            <section className={styles["gallery"]}>
+                <ul className={styles['gallery-ul']}>
+                {
+                    albums.map(({ img, albumID }) => (
+                        <AlbumCard
+                            img={img}
+                            key={albumID}
+                        />
+                    ))
+                }
+                </ul>
+            </section>
         </div>
+        </>
     )
-    : <Redirect to='/' />
+        : <Redirect to='/' />
 }
 
 export default PhotoAlbums;

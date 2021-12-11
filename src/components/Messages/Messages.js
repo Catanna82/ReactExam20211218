@@ -1,6 +1,6 @@
 // import MessagesRow from './MessagesRow';
 import Logo from '../Logo/Logo';
-import './messagesStyle.css';
+import './messagesStyle.module.css';
 
 const Messages = (messages) => {
     return (

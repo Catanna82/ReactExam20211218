@@ -64,12 +64,12 @@ const MyComments = ({ getFetch, postFetch }) => {
                         <div className='col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4 my-comment-form'>
                             <form id='algin-form' className='my-comment-form'>
                                 <div className='form-group'>
-                                    <h4 className='comment-h4 comment-h4-center'>Оставете коментар</h4>
-                                    <label className='comment-form-label' htmlFor='message'>Коментар</label>
+                                    <h4 className='my-comment-h4 my-comment-h4-center'>Редакция на коментар</h4>
+                                    <label className='my-comment-form-label' htmlFor='message'>Коментар</label>
                                     <textarea onChange={onChangeHandler} value={input.msg} name='msg' id='' cols='30' rows='5' className='form-control text-comment' />
                                 </div>
                                 <div className='form-group'>
-                                    <button onClick={onClickHandler} type='button' id='post' className='comment-btn'>Post Comment</button>
+                                    <button onClick={onClickHandler} type='button' id='post' className='comment-btn'>Публикувай</button>
                                 </div>
                             </form>
                         </div>
