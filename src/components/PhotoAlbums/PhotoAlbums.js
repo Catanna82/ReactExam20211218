@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import AuthContext from '../../contexts/AuthContext';
 import Logo from "../Logo/Logo";
 import AlbumCard from "./PhotoAlbumCard";
-import styles from './photoAlbums.module.css';
+import './photoAlbums.css';
 
 const PhotoAlbums = ({ getFetch }) => {
 
@@ -22,10 +22,10 @@ const PhotoAlbums = ({ getFetch }) => {
     return userID ? (
         <>
             < Logo />
-        <div className={styles['photo-albums']}>
-            <h1 className={styles['album-title']}> Photo Albums</h1>
-            <section className={styles["gallery"]}>
-                <ul className={styles['gallery-ul']}>
+        <div className='photo-albums'>
+            <h1 className='album-title'>Фото албуми</h1>
+            <section className="gallery">
+                <ul className='gallery-ul'>
                 {
                     albums.map(({ img, albumID }) => (
                         <AlbumCard

@@ -1,6 +1,6 @@
 .photo-albums {
-    display: flex;
-    flex-direction: column;
+    width: 900px;
+    margin: 50px auto;
 }
 
 .album-title {
@@ -22,10 +22,12 @@
     background-color: white;
     margin-bottom: 30px;
     box-shadow: 0px 2px 7px 3px #000000;
-    width: 400px;
+    width: 190px;
     text-decoration: none;
     list-style: none;
     box-shadow: 0px 2px 7px 3px #000000;
+    display: inline-flex;
+    align-items: center;
 }
 
 .gallery-li img {

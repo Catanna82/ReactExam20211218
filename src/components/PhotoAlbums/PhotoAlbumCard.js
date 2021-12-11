@@ -1,8 +1,8 @@
-import styles from './photoAlbums.module.css';
+
 const AlbumCard = ({ img }) => {
     return (
-        <li className={styles['gallery-li']}>
-            <img src={img} alt='' className={styles['gallery-card-img']} />
+        <li className='gallery-li'>
+            <img src={img} alt='' className='gallery-card-img' />
         </li>
         // <div className='one-fifth'>
         //     <p>
