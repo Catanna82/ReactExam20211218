@@ -60,7 +60,6 @@
 padding: 0 10px;
 }
 
-#nav-items li a,
 #profile {
     text-decoration: none;
     color: rgb(224, 219, 219);
@@ -91,12 +90,10 @@ padding: 0 10px;
 
 .my-comment {
     border: 1px solid rgba(16, 46, 46, 1);
-    background-color: rgba(16, 46, 46, 0.973);
+    background-color: #7c7151;
     float: left;
     border-radius: 5px;
     padding: 20px;
-    margin-top: 5%;
-    /* margin-left: 20px; */
     width: 555px;
     display: flex;
     flex-direction: row;
@@ -130,6 +127,7 @@ padding: 0 10px;
 .my-comment-p {
     padding-left: 20px;
     padding-top: 20px;
+    width: 100%;
 }
 .my-comment-h4 {
     color: rgb(212, 208, 208);

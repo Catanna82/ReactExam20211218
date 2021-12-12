@@ -22,21 +22,21 @@ const PhotoAlbums = ({ getFetch }) => {
     return userID ? (
         <>
             < Logo />
-        <div className='photo-albums'>
-            <h1 className='album-title'>Фото албуми</h1>
-            <section className="gallery">
-                <ul className='gallery-ul'>
-                {
-                    albums.map(({ img, albumID }) => (
-                        <AlbumCard
-                            img={img}
-                            key={albumID}
-                        />
-                    ))
-                }
-                </ul>
-            </section>
-        </div>
+            <div className='photo-albums'>
+                <h1 className='album-title'>Фото албуми</h1>
+                <section className="gallery">
+                    <ul className='gallery-ul'>
+                        {
+                            albums.map(({ img, albumID }) => (
+                                <AlbumCard
+                                    img={img}
+                                    key={albumID}
+                                />
+                            ))
+                        }
+                    </ul>
+                </section>
+            </div>
         </>
     )
         : <Redirect to='/' />
