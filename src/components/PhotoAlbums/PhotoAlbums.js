@@ -43,7 +43,7 @@ const PhotoAlbums = ({ getFetch }) => {
                 </div>
             </>
     )
-        : <Redirect to='/' />
+        : <Redirect to='/login' />
 }
 
 export default PhotoAlbums;

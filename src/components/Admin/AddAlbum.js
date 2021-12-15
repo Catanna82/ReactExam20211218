@@ -76,7 +76,7 @@ const Admin = ({ postFetch, getFetch }) => {
             <>
                 <Logo />
                 <div className='admin-page'>
-                    <main className='admin-page-main'>
+                    <main className='admin-main'>
                         <div className='admin-page-main-container-upload'>
                             <div id='admin-form' className='admin' action='' method='POST'>
                                 <div className='flex'>

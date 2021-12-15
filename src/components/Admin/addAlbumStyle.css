@@ -1,8 +1,9 @@
-.admin-page-main {
-    flex-basis: 75%;
+.admin-main {
+    flex-basis: 100%;
+    margin-bottom: 131px;
 }
 
-.admin-page-aside {
+/* .admin-page-aside {
     flex-grow: 2;
     flex-basis: 15%;
     padding-left: 40px;
@@ -13,7 +14,7 @@ aside a {
     text-decoration: none;
     color: rgb(0, 153, 0);
     line-height: 1.2;
-}
+} */
 
 .square-li {
     margin: 10px;
