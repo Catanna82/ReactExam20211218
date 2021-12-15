@@ -1,4 +1,4 @@
-import AddCommentBtns from "./AddCommentBtns";
+import AddCommentBtns from "../Common/Btns/AddCommentBtns";
 
 const AddCommentRow = ({ className, name, img, text, date }) => {
     return (

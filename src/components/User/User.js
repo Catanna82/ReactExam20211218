@@ -64,7 +64,7 @@ const User = () => {
                         <nav>
                             <ul type='square'>
                                 <li className='square-li'>
-                                <a href='/albums'>Моите албуми</a>
+                                    <a href='/albums'>Моите албуми</a>
                                 </li>
                                 <li className='square-li'>
                                     <a href='/userPhotosDownload'>Изтегли снимки</a>
@@ -79,9 +79,6 @@ const User = () => {
                                 <li className='square-li'>
                                     <a href='/myComments'>Моите коментари</a>
                                 </li>
-                                <li className='square-li'>
-                                    <a href='/editComment'>Редактиране на коментари</a>
-                                </li>
                             </ul>
                         </nav>
                     </section>
@@ -89,7 +86,7 @@ const User = () => {
             </div>
         </>
     )
-    : <Redirect to='/' />
+        : <Redirect to='/' />
 }
 
 export default User;

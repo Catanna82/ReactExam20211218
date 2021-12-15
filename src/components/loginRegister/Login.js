@@ -55,7 +55,6 @@ const Login = ({ postFetch}) => {
         historyHook.push('/');
     }
 
-
     return (
         <div className='log'>
             <Logo />

@@ -128,14 +128,37 @@ app.get('/api/loadUsers', function (req, res) {
 });
 
 app.get('/api/loadComment/:userID', function (req, res) {
-    commentsModel.find({ userID: req.params.userID }, function (err, data) {
+    model.findById(req.params.userID, function (userErr, userData) {
+        if (userErr) {
+            res.send(userErr);
+        } else {
+            const username = userData.name;
+            commentsModel.find({ userID: req.params.userID }, function (err, data) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(data.map(c => ({
+                        date: c.date,
+                        msg: c.msg,
+                        _id: c._id,
+                        name: username
+                    })));
+                }
+            });
+        }
+    })
+
+});
+app.post('/api/updateComment', function (req, res) {
+    commentsModel.updateOne({ _id: req.body.commentID }, { msg: req.body.text }, {}, function (err, data) {
         if (err) {
             res.send(err);
         } else {
             res.send(data);
         }
-    });
+    })
 });
+
 app.get('/api/loadComment', function (req, res) {
     commentsModel.find({}, function (err, data) {
         if (err) {
@@ -176,9 +199,9 @@ app.get('/api/loadAlbums', function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            const albums = await data.map(async(a) => {
+            const albums = await data.map(async (a) => {
                 const img = a.images[0];
-                const file = await dbx.filesDownload({path: '/' + img});
+                const file = await dbx.filesDownload({ path: '/' + img });
                 return {
                     img: file.result.fileBinary.toString(),
                     albumID: a._id
