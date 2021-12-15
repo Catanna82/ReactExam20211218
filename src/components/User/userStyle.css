@@ -2,6 +2,10 @@
     margin: 0 auto;
 }
 
+.user-profile-card-body {
+    margin-top: 20px;
+}
+
 .admin-page-main {
     flex-basis: 75%;
 }
@@ -25,10 +29,10 @@ aside a {
 }
 
 .user-page {
-    margin-top: 104px;
+    margin-top: 177px;
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 107px;
+    margin-bottom: 169px;
 }
 
 .page-title {
@@ -125,6 +129,7 @@ p.error {
 .admin-category {
     margin: 10px;
 }
+
 
 @media all and (max-width: 780px) {
     .header-nav, .header-nav ul {

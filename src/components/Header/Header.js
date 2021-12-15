@@ -26,11 +26,9 @@ export default function Header() {
                         <div className='navbar-collapse collapse'>
                             <ul className='nav navbar-nav navbar-right'>
                                 {!userID && < li ><Link to='/login' >Вход</Link></li>}
-                                {/* < li ><Link to='/comments' >Коментари</Link></li>  */}
-                                {userID && < li ><Link to='/add' >Добави коментар</Link></li>}
-                                {userID && isAdmin && < li ><Link to='/admin' >Админ панел</Link></li>}
+                                {userID && < li ><Link to='/addComments' >Коментари</Link></li>}
                                 {userID && isAdmin && < li ><Link to='/messages' ><i className='far fa-envelope header-i'></i></Link></li>}
-                                {userID && !isAdmin && < li ><Link to='/user' >My space</Link></li>}
+                                {userID && < li ><Link to='/user' >Профил</Link></li>}
                                 {userID && < li ><Link to='/' onClick={logout}>Изход</Link></li>}
                             </ul>
                             <ul className='nav navbar-nav navbar-right scroll'>
@@ -40,10 +38,6 @@ export default function Header() {
                                 <li ><Link to='#partners'>Партньори</Link></li>
                                 <li ><Link to='#contact'>Контакти</Link></li>
                             </ul>
-                            {/* {user.email
-                                ? userNavigation
-                                : guestNavigation
-                            } */}
                         </div>
                     </div>
                 </div>

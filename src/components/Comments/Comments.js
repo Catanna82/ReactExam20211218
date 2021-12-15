@@ -1,5 +1,5 @@
 import Logo from '../Logo/Logo';
-import MyCommentRow from './MyCommentRow';
+import CommentRow from './CommentRow';
 import { format as formatDate } from 'date-fns'
 import { useEffect, useContext, useState } from 'react';
 import './myComment.css';
@@ -7,10 +7,14 @@ import { Redirect } from 'react-router';
 import AuthContext from '../../contexts/AuthContext';
 import EditComments from '../EditComments/EditComments';
 
-const MyComments = ({ getFetch, postFetch }) => {
-
+const Comments = ({ getFetch, postFetch, userId, status }) => {
     const load = async () => {
-        const data = await getFetch(`/api/loadComment/${userID}`);
+        let data;
+        if(userId) {
+            data = await getFetch(`/api/loadComment/${userID}`);
+        } else if (status) {
+            data = await getFetch(`/api/loadComments/${status}`);
+        }
         setComments(data);
     }
 
@@ -23,18 +27,7 @@ const MyComments = ({ getFetch, postFetch }) => {
 
     useEffect(() => load(), []);
 
-    // const onChangeHandler = (e) => {
-    //     const { name, value } = e.target;
-
-    //     setInput(oldInput => {
-    //         return {
-    //             ...oldInput,
-    //             [name]: value
-    //         };
-    //     });
-    // };
     const onClickHandler = async () => {
-        debugger;
         await postFetch('/api/updateComment', editComment);
         load();
         setEditComment({
@@ -42,10 +35,31 @@ const MyComments = ({ getFetch, postFetch }) => {
             text: ''
         });
     };
+    const onDeleteHandler = async (commentID) => {
+        await postFetch('/api/deleteComment', {commentID});
+        load();
+    };
+
+    const approveComment = async (commentID) => {
+        await postFetch('/api/updateComment', {
+            commentID,
+            status: 'approved'
+        });
+        load();
+    };
+
+    const rejectComment = async (commentID) => {
+        await postFetch('/api/updateComment', {
+            commentID,
+            status: 'rejected'
+        });
+        load();
+    };
 
     const { user: {
         userID
     } } = useContext(AuthContext);
+
     return userID ? (
         <>
             <Logo />
@@ -53,11 +67,11 @@ const MyComments = ({ getFetch, postFetch }) => {
                 <div className='container'>
                     <div className='row'>
                         <div className='col-sm-5 col-md-6 col-12 pb-4 my-comment-flex'>
-                            {comments.map(({ date, msg, name, _id }, i) => {
+                            {comments.map(({ date, msg, name, _id, status }, i) => {
                                 const style = (i % 2 === 0 && 'my-comment mt-4 text-justify float-left') ||
                                     'text-justify my-darker mt-4 float-right';
                                 return (
-                                    < MyCommentRow
+                                    < CommentRow
                                         key={_id}
                                         className={style}
                                         name={name}
@@ -66,12 +80,22 @@ const MyComments = ({ getFetch, postFetch }) => {
                                         text={msg}
                                         commentID={_id}
                                         setEditComment={setEditComment}
+                                        onDeleteHandler={onDeleteHandler}
+                                        status={status}
+                                        approveComment={approveComment}
+                                        rejectComment={rejectComment}
                                     />
                                 );
                             })}
                         </div>
                         {
-                            editComment.commentID && <EditComments text={editComment.text} commentID={editComment.commentID} onClickHandler={onClickHandler} setEditComment={setEditComment}/>
+                            editComment.commentID &&
+                                <EditComments
+                                    text={editComment.text}
+                                    commentID={editComment.commentID}
+                                    onClickHandler={onClickHandler}
+                                    setEditComment={setEditComment}
+                                />
                         }
                     </div>
                 </div>
@@ -81,4 +105,4 @@ const MyComments = ({ getFetch, postFetch }) => {
         : <Redirect to='/' />
 }
 
-export default MyComments;
+export default Comments;

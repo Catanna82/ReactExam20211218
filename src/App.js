@@ -1,6 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
 import { getFetch, postFetch } from './services/dbServices';
-// import { useState } from 'react';
 
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
@@ -16,17 +15,15 @@ import ErrorPage from './components/ErrorPage/ErrorPage';
 import PhotoAlbums from './components/PhotoAlbums/PhotoAlbums';
 import Album from './components/Album/Album';
 import AddComment from './components/AddComment/AddComment';
-import Admin from './components/Admin/Admin';
+import AddAlbum from './components/Admin/AddAlbum';
 import AuthContext from './contexts/AuthContext';
 import useLocalStorage from './hooks/useLocalStorage';
-import UserProfilPage from './components/UserProfilPage/UserProfilePage';
 import AlbumPreview from './components/AlbumPreview/AlbumPreview';
-import EditPage from './components/EditProfile/editPage';
 import User from './components/User/User';
 import UserPhotosDownload from './components/UserPhotosDownload/UserPhotosDownload';
 import EditComments from './components/EditComments/EditComments';
 import Logo from './components/Logo/Logo';
-import MyComments from './components/MyComments/MyComments'
+import Comments from './components/Comments/Comments';
 import Studio from './components/Studio/Studio';
 import Messages from './components/Messages/Messages';
 
@@ -68,7 +65,7 @@ function App() {
             <Login postFetch={postFetch} />
             <Footer />
           </Route>
-          <Route path='/albums'>
+          <Route path='/allAlbums'>
             <PhotoAlbums getFetch={getFetch} />
             <Footer />
           </Route>
@@ -81,8 +78,8 @@ function App() {
             <AlbumPreview />
             <Footer />
           </Route>
-          <Route path='/admin'>
-            <Admin postFetch={postFetch} getFetch={getFetch}/>
+          <Route path='/addAlbum'>
+            <AddAlbum postFetch={postFetch} getFetch={getFetch} />
             <Footer />
           </Route>
           <Route path='/messages'>
@@ -90,19 +87,11 @@ function App() {
             <Footer />
           </Route>
           <Route path='/user'>
-            <User />
+            <User getFetch={getFetch} postFetch={postFetch} />
             <Footer />
           </Route>
           <Route path='/userPhotosDownload'>
             <UserPhotosDownload />
-            <Footer />
-          </Route>
-          <Route path='/profile'>
-            <UserProfilPage />
-            <Footer />
-          </Route>
-          <Route path='/edit'>
-            <EditPage />
             <Footer />
           </Route>
           <Route path='/studio'>
@@ -114,11 +103,19 @@ function App() {
             <Footer />
           </Route>
           <Route path='/myComments'>
-            <MyComments postFetch={postFetch} getFetch={getFetch}/>
+            <Comments postFetch={postFetch} getFetch={getFetch} userId={user.userID}/>
             <Footer />
           </Route>
-          <Route path='/add'>
-            <AddComment postFetch={postFetch} getFetch={getFetch} />
+          <Route path='/pendingComments'>
+            <Comments postFetch={postFetch} getFetch={getFetch} status={'pending'}/>
+            <Footer />
+          </Route>
+          <Route path='/rejectedComments'>
+            <Comments postFetch={postFetch} getFetch={getFetch} status={'rejected'}/>
+            <Footer />
+          </Route>
+          <Route path='/addComments'>
+            <AddComment postFetch={postFetch} getFetch={getFetch} status={'approved'}/>
             <Footer />
           </Route>
           <Route path='/*' component={ErrorPage} />

@@ -43,6 +43,9 @@ const UserSchema = new Schema({
     name: { type: String },
     email: { type: String },
     password: { type: String },
+    phone: { type: String },
+    address: { type: String },
+    img: { type: String },
     admin: { type: Boolean }
 }, { versionKey: false });
 
@@ -50,6 +53,7 @@ const CommentsSchema = new Schema({
     userID: { type: String },
     date: { type: Date },
     msg: { type: String },
+    status: {type: String}
 }, { versionKey: false });
 
 const AlbumsSchema = new Schema({
@@ -85,9 +89,18 @@ app.post('/api/SaveUser', function (req, res) {
         }
     });
 });
+app.post('/api/UpdateUser', function (req, res) {
+    model.updateOne({ _id: req.body._id }, req.body, {}, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(data);
+        }
+    })
+});
 
 app.post('/api/deleteUser', function (req, res) {
-    model.remove({ _id: req.body.id }, function (err) {
+    model.deleteOne({ _id: req.body.userID }, function (err) {
         if (err) {
             res.send(err);
         } else {
@@ -101,18 +114,9 @@ app.post('/api/login', function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            res.send({ userID: data[0]._id, isAdmin: data[0].admin });
-        }
-    });
-});
-
-app.post('/api/saveComment', function (req, res) {
-    const mod = new commentsModel(req.body);
-    mod.save(function (err, data) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send({ data: 'Record has been Inserted..!!' });
+            if(data[0]){
+                res.send({ userID: data[0]._id, isAdmin: data[0].admin });
+            }
         }
     });
 });
@@ -123,6 +127,29 @@ app.get('/api/loadUsers', function (req, res) {
             res.send(err);
         } else {
             res.send(data.map(({ _id, name }) => ({ userID: _id, name })));
+        }
+    });
+});
+app.get('/api/loadUsers/:userID', function (req, res) {
+    model.findById(req.params.userID, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(data);
+        }
+    });
+});
+
+app.post('/api/saveComment', function (req, res) {
+    const mod = new commentsModel({
+        ...req.body,
+        status: 'pending'
+    });
+    mod.save(function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send({ data: 'Record has been Inserted..!!' });
         }
     });
 });
@@ -149,8 +176,20 @@ app.get('/api/loadComment/:userID', function (req, res) {
     })
 
 });
+
 app.post('/api/updateComment', function (req, res) {
-    commentsModel.updateOne({ _id: req.body.commentID }, { msg: req.body.text }, {}, function (err, data) {
+    let updateData;
+    if (req.body.text) {
+        updateData = {
+            msg: req.body.text,
+            status: 'pending'
+        };
+    } else if (req.body.status) {
+        updateData = {
+            status: req.body.status
+        };
+    }
+    commentsModel.updateOne({ _id: req.body.commentID }, updateData, {}, function (err, data) {
         if (err) {
             res.send(err);
         } else {
@@ -159,14 +198,40 @@ app.post('/api/updateComment', function (req, res) {
     })
 });
 
-app.get('/api/loadComment', function (req, res) {
-    commentsModel.find({}, function (err, data) {
+app.post('/api/deleteComment', function (req, res) {
+    commentsModel.deleteOne({ _id: req.body.commentID }, {}, function (err) {
         if (err) {
             res.send(err);
         } else {
-            res.send(data);
+            res.send({ data: 'Record has been Deleted..!!' });
         }
     });
+});
+
+app.get('/api/loadComments/:status', function (req, res) {
+    model.find({}, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            const users = data.reduce((acc, curr) => {
+                acc[curr._id] = curr.name;
+                return acc;
+            }, {});
+            commentsModel.find({status: req.params.status}, function (err, data) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(data.map(({ date, msg, userID, _id, status }) => ({
+                        date,
+                        msg,
+                        name: users[userID] || 'Деактивиран профил',
+                        _id,
+                        status
+                    })));
+                }
+            });
+        }
+    })
 });
 
 app.get('/api/loadImages', function (req, res) {

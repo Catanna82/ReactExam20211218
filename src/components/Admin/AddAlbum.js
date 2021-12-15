@@ -1,6 +1,6 @@
 import Logo from '../Logo/Logo';
 import UploadImg from '../UploadImg/UploadImg';
-import './stylesAdmin.css';
+import './addAlbumStyle.css';
 import { Redirect } from 'react-router';
 import { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -126,43 +126,6 @@ const Admin = ({ postFetch, getFetch }) => {
                             </div>
                         </div>
                     </main>
-                    <aside className='admin-page-aside'>
-                        <section>
-                            <h3 className='admin-page-aside-aside-h3'>Албуми</h3>
-                            <nav>
-                                <ul type='square'>
-                                    <li className='square-li'>
-                                        <a href='/addalbum'>Добавяне на албум</a>
-                                    </li>
-                                    <li className='square-li'>
-                                        <a href='/editAlbum'>Редактиране на албум</a>
-                                    </li>
-                                    <li className='square-li'>
-                                        <a href='/lockAlbum'>Заключване на албум</a>
-                                    </li>
-                                    <li className='square-li'>
-                                        <a href='/profile'>Профил</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </section>
-                        <section>
-                            <h3 className='admin-page-aside-aside-h3'>Коментари</h3>
-                            <nav>
-                                <ul type='square'>
-                                    <li className='square-li'>
-                                        <a href='/allComments'>Всички коментари</a>
-                                    </li>
-                                    <li className='square-li'>
-                                        <a href='/rejectComments'>Отхвърлени коментари</a>
-                                    </li>
-                                    <li className='square-li'>
-                                        <a href='/aproveComments'>Одобри коментар</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </section>
-                    </aside>
                 </div>
                 <UploadImg images={images} />
             </>

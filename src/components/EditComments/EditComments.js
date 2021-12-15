@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Redirect } from 'react-router';
 import AuthContext from '../../contexts/AuthContext';
-import '../MyComments/myComment.css';
+import '../Comments/myComment.css';
 
 const EditComments = ({ postFetch, text, commentID, onClickHandler, setEditComment }) => {
     const onChangeHandler = (e) => {

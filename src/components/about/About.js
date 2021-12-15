@@ -36,7 +36,7 @@ export default function About() {
                     <AboutServices
                         className='fa fa-camera-retro'
                         title='Фото албуми'
-                        url='/albums'
+                        url='/allAlbums'
                     />
                     <AboutServices
                         className='fa fa-graduation-cap'

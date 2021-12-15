@@ -2,7 +2,15 @@ import AuthContext from '../../../contexts/AuthContext';
 import { useContext } from 'react';
 import './addCommentBtnsStyle.css';
 
-const AddCommentBtns = ({ setEditComment, text, commentID }) => {
+const AddCommentBtns = ({
+    setEditComment,
+    text,
+    commentID,
+    onDeleteHandler,
+    status,
+    approveComment,
+    rejectComment
+}) => {
     const { user: {
         userID,
         isAdmin
@@ -10,29 +18,31 @@ const AddCommentBtns = ({ setEditComment, text, commentID }) => {
 
     const editCommentHandler = (e) => {
         e.preventDefault();
-        debugger;
         setEditComment({
             commentID: commentID,
             text: text
-        })
-    }
+        });
+    };
 
-    const deleteHandler = (e) => {
+    const deleteCommentHandler = (e) => {
         e.preventDefault();
-    }
+        onDeleteHandler(commentID);
+    };
     const approveHandler = (e) => {
         e.preventDefault();
-    }
+        approveComment(commentID);
+    };
     const rejectHandler = (e) => {
         e.preventDefault();
-    }
+        rejectComment(commentID);
+    };
 
     const UserBtn = () => {
 
         return (
             <>
                 <button className='edit-btn' onClick={editCommentHandler}>Редактирай</button>
-                <button className='edit-btn' onClick={deleteHandler}>Изтрий</button>
+                <button className='edit-btn' onClick={deleteCommentHandler}>Изтрий</button>
             </>
         )
     };
@@ -50,7 +60,7 @@ const AddCommentBtns = ({ setEditComment, text, commentID }) => {
         <div className='user-author-btn'>
             {userID && isAdmin
                 ? <>
-                    <AdminBtn />
+                    {status === 'pending' && <AdminBtn />}
                     <UserBtn />
                 </>
                 : <UserBtn />
