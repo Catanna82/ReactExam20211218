@@ -7,14 +7,26 @@ import './photoAlbums.css';
 import Loader from '../Common/Loader/Loader';
 import AlbumPreview from '../AlbumPreview/AlbumPreview';
 
-const PhotoAlbums = ({ getFetch }) => {
+const PhotoAlbums = ({ getFetch, postFetch, userId }) => {
 
     const [albums, setAlbums] = useState([]);
     const [albumID, setAlbumID] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const loadAlbums = async () => {
-        const data = await getFetch('/api/loadAlbums');
+        let params;
+        if(isAdmin) {
+            params = {};
+        } else if(userId){
+            params = {
+                userID
+            }
+        } else {
+            params = {
+                userID: ''
+            }
+        }
+        const data = await postFetch('/api/loadAlbums', params);
         setAlbums(data);
         setLoading(false);
     }
@@ -22,12 +34,12 @@ const PhotoAlbums = ({ getFetch }) => {
 
     const previewAlbum = (albumID) => {
         setAlbumID(albumID);
-
     }
     useEffect(() => loadAlbums(), [])
 
     const { user: {
-        userID
+        userID,
+        isAdmin
     } } = useContext(AuthContext);
     return userID ? (
         loading ? <Loader />

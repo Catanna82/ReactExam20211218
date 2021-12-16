@@ -44,9 +44,9 @@ export default function About() {
                         url='/studio'
                     />
                     <AboutServices
-                        className=' fa fas fa-download'
-                        title='Изтегли албум'
-                        url='/userPhotosDownload'
+                        className='fa fas fa-comments'
+                        title='Коментари'
+                        url='/addComments'
                     />
                 </ul>
             </div>

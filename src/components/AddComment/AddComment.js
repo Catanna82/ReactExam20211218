@@ -52,7 +52,7 @@ const AddComment = ({ getFetch, postFetch, status }) => {
                                         key={_id}
                                         className={style}
                                         name={name}
-                                        img='https://i.imgur.com/yTFUilP.jpg'
+                                        img='/images/profile.jpg'
                                         date={formatDate(new Date(date), 'dd/MM/yyyy')}
                                         text={msg}
                                     />

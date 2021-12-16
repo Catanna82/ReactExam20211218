@@ -64,7 +64,9 @@ const AlbumPreview = ({ albumID, getFetch }) => {
                 <Logo />
                 <div className='slideshow'>
                     <div className='mainImg-container'>
-                        <img className='mainImg' src={imgs[index]} alt='not found' />
+                        <a href={imgs[index]} download={index}>
+                            <img className='mainImg' src={imgs[index]} alt='not found' />
+                        </a>
                     </div>
                     <div className='slideshow-actions'>
                         <button className='slideshow-button' onClick={prev}>👈</button>

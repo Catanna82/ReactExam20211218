@@ -13,21 +13,18 @@ import BlueimpGallery from './components/BlueimpGallery/BlueimpGallery';
 import Login from './components/LoginRegister/Login';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import PhotoAlbums from './components/PhotoAlbums/PhotoAlbums';
-import Album from './components/Album/Album';
 import AddComment from './components/AddComment/AddComment';
 import AddAlbum from './components/Admin/AddAlbum';
 import AuthContext from './contexts/AuthContext';
 import useLocalStorage from './hooks/useLocalStorage';
 import User from './components/User/User';
-import UserPhotosDownload from './components/UserPhotosDownload/UserPhotosDownload';
 import EditComments from './components/EditComments/EditComments';
-import Logo from './components/Logo/Logo';
 import Comments from './components/Comments/Comments';
 import Studio from './components/Studio/Studio';
 import Messages from './components/Messages/Messages';
 
 const initialAuthState = {
-  userId: null,
+  userID: null,
   isAdmin: false,
 };
 
@@ -55,7 +52,7 @@ function App() {
             <Works />
             <Partners />
             <HighlightInfo />
-            <Contacts />
+            <Contacts postFetch={postFetch} />
             <a href='#home' className='gototop'><i className='fa fa-angle-up fa-3x'></i></a>
             <BlueimpGallery />
             <Footer />
@@ -65,12 +62,11 @@ function App() {
             <Footer />
           </Route>
           <Route path='/allAlbums'>
-            <PhotoAlbums getFetch={getFetch} />
+            <PhotoAlbums postFetch={postFetch} getFetch={getFetch}/>
             <Footer />
           </Route>
-          <Route path='/album'>
-            <Logo />
-            <Album />
+          <Route path='/myAlbums'>
+            <PhotoAlbums postFetch={postFetch} getFetch={getFetch} userId={user.userID}/>
             <Footer />
           </Route>
           <Route path='/addAlbum'>
@@ -78,15 +74,11 @@ function App() {
             <Footer />
           </Route>
           <Route path='/messages'>
-            <Messages />
+            <Messages postFetch={postFetch} />
             <Footer />
           </Route>
           <Route path='/user'>
             <User getFetch={getFetch} postFetch={postFetch} />
-            <Footer />
-          </Route>
-          <Route path='/userPhotosDownload'>
-            <UserPhotosDownload />
             <Footer />
           </Route>
           <Route path='/studio'>
@@ -98,19 +90,19 @@ function App() {
             <Footer />
           </Route>
           <Route path='/myComments'>
-            <Comments postFetch={postFetch} getFetch={getFetch} userId={user.userID}/>
+            <Comments postFetch={postFetch} getFetch={getFetch} userId={user.userID} />
             <Footer />
           </Route>
           <Route path='/pendingComments'>
-            <Comments postFetch={postFetch} getFetch={getFetch} status={'pending'}/>
+            <Comments postFetch={postFetch} getFetch={getFetch} status={'pending'} />
             <Footer />
           </Route>
           <Route path='/rejectedComments'>
-            <Comments postFetch={postFetch} getFetch={getFetch} status={'rejected'}/>
+            <Comments postFetch={postFetch} getFetch={getFetch} status={'rejected'} />
             <Footer />
           </Route>
           <Route path='/addComments'>
-            <AddComment postFetch={postFetch} getFetch={getFetch} status={'approved'}/>
+            <AddComment postFetch={postFetch} getFetch={getFetch} status={'approved'} />
             <Footer />
           </Route>
           <Route path='/*' component={ErrorPage} />

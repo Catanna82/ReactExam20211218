@@ -53,7 +53,13 @@ const CommentsSchema = new Schema({
     userID: { type: String },
     date: { type: Date },
     msg: { type: String },
-    status: {type: String}
+    status: { type: String }
+}, { versionKey: false });
+
+const MessagesSchema = new Schema({
+    name: { type: String },
+    email: { type: String },
+    msg: { type: String }
 }, { versionKey: false });
 
 const AlbumsSchema = new Schema({
@@ -65,6 +71,7 @@ const AlbumsSchema = new Schema({
 
 const albumsModel = mongo.model('albums', AlbumsSchema, 'albums');
 const commentsModel = mongo.model('comments', CommentsSchema, 'comments');
+const messageModel = mongo.model('message', MessagesSchema, 'message');
 const model = mongo.model('users', UserSchema, 'users');
 
 app.post('/api/SaveUser', function (req, res) {
@@ -114,7 +121,7 @@ app.post('/api/login', function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            if(data[0]){
+            if (data[0]) {
                 res.send({ userID: data[0]._id, isAdmin: data[0].admin });
             }
         }
@@ -132,6 +139,27 @@ app.get('/api/loadUsers', function (req, res) {
 });
 app.get('/api/loadUsers/:userID', function (req, res) {
     model.findById(req.params.userID, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(data);
+        }
+    });
+});
+
+app.post('/api/saveMessage', function (req, res) {
+    const mess = new messageModel(req.body);
+    mess.save(function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send({ data: 'Record has been Inserted..!!' });
+        }
+    });
+});
+
+app.post('/api/loadMessages', function (req, res) {
+    messageModel.find({}, function (err, data) {
         if (err) {
             res.send(err);
         } else {
@@ -217,7 +245,7 @@ app.get('/api/loadComments/:status', function (req, res) {
                 acc[curr._id] = curr.name;
                 return acc;
             }, {});
-            commentsModel.find({status: req.params.status}, function (err, data) {
+            commentsModel.find({ status: req.params.status }, function (err, data) {
                 if (err) {
                     res.send(err);
                 } else {
@@ -259,8 +287,8 @@ app.get('/api/loadImages', function (req, res) {
     });
 });
 
-app.get('/api/loadAlbums', function (req, res) {
-    albumsModel.find({}, async function (err, data) {
+app.post('/api/loadAlbums', function (req, res) {
+    albumsModel.find(req.body, async function (err, data) {
         if (err) {
             res.send(err);
         } else {
@@ -284,7 +312,7 @@ app.get(`/api/loadAlbums/:albumID`, function (req, res) {
             res.send(err);
         } else {
             const albums = await data.images.map(async (a) => {
-                return dbx.filesDownload({ path: '/' + a});
+                return dbx.filesDownload({ path: '/' + a });
             })
             const returnData = await Promise.all(albums);
             res.send(returnData.map(i => i.result.fileBinary.toString()));

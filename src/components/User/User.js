@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import AuthContext from '../../contexts/AuthContext';
 import EditProfilePage from './EditProfilePage';
@@ -98,10 +98,7 @@ const User = ({ getFetch, postFetch }) => {
                             {!isAdmin && <nav>
                                 <ul type='square'>
                                     <li className='square-li'>
-                                        <a href='/allAlbums'>Моите албуми</a>
-                                    </li>
-                                    <li className='square-li'>
-                                        <a href='/userPhotosDownload'>Изтегли снимки</a>
+                                        <a href='/myAlbums'>Моите албуми</a>
                                     </li>
                                 </ul>
                             </nav>}
