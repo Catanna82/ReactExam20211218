@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import AuthContext from '../../contexts/AuthContext';
 import EditProfilePage from './EditProfilePage';
@@ -50,6 +50,7 @@ const User = ({ getFetch, postFetch }) => {
                             <div className='user-profile-main'>
                                 <div className='user-profile-main-topbar'>
                                     <a className='user-profile-main-topbar-a' href='/' onClick={logout}>Изход</a>
+                                    {userID && isAdmin && <a className='user-profile-main-topbar-a' href='/messages' ><i className='far fa-envelope header-i'></i></a>}
                                 </div>
                             </div>
                             <div className='user-profile-row'>

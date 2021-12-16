@@ -18,7 +18,6 @@ import AddComment from './components/AddComment/AddComment';
 import AddAlbum from './components/Admin/AddAlbum';
 import AuthContext from './contexts/AuthContext';
 import useLocalStorage from './hooks/useLocalStorage';
-import AlbumPreview from './components/AlbumPreview/AlbumPreview';
 import User from './components/User/User';
 import UserPhotosDownload from './components/UserPhotosDownload/UserPhotosDownload';
 import EditComments from './components/EditComments/EditComments';
@@ -72,10 +71,6 @@ function App() {
           <Route path='/album'>
             <Logo />
             <Album />
-            <Footer />
-          </Route>
-          <Route path='/selectedAlbum'>
-            <AlbumPreview />
             <Footer />
           </Route>
           <Route path='/addAlbum'>

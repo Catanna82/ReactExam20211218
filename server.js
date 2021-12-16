@@ -278,12 +278,16 @@ app.get('/api/loadAlbums', function (req, res) {
     });
 });
 
-app.get(`/api/loadAlbums/:albumName`, function (req, res) {
-    albumsModel.findOne(req.params, function (err, data) {
+app.get(`/api/loadAlbums/:albumID`, function (req, res) {
+    albumsModel.findById(req.params.albumID, async function (err, data) {
         if (err) {
             res.send(err);
         } else {
-            res.send(data.images);
+            const albums = await data.images.map(async (a) => {
+                return dbx.filesDownload({ path: '/' + a});
+            })
+            const returnData = await Promise.all(albums);
+            res.send(returnData.map(i => i.result.fileBinary.toString()));
         }
     });
 });

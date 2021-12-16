@@ -27,7 +27,8 @@ export default function Header() {
                             <ul className='nav navbar-nav navbar-right'>
                                 {!userID && < li ><Link to='/login' >Вход</Link></li>}
                                 {userID && < li ><Link to='/addComments' >Коментари</Link></li>}
-                                {userID && isAdmin && < li ><Link to='/messages' ><i className='far fa-envelope header-i'></i></Link></li>}
+                                {userID && < li ><Link to='/allAlbums' >Албуми</Link></li>}
+                               
                                 {userID && < li ><Link to='/user' >Профил</Link></li>}
                                 {userID && < li ><Link to='/' onClick={logout}>Изход</Link></li>}
                             </ul>
