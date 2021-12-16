@@ -228,7 +228,7 @@ app.post('/api/updateComment', function (req, res) {
 });
 
 app.post('/api/likes', function (req, res) {
-    commentsModel.updateOne({ _id: req.body.commentID }, {likes: req.body.likes}, {}, function (err, data) {
+    commentsModel.updateOne({ _id: req.body.commentID }, { likes: req.body.likes }, {}, function (err, data) {
         if (err) {
             res.send(err);
         } else {
@@ -356,6 +356,27 @@ app.post('/api/saveAlbums', function (req, res) {
         }
     });
 
+});
+
+app.post('/api/deleteAlbum', function (req, res) {
+    const _id = req.body.albumID;
+    albumsModel.findById(_id, async function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            const paths = data.images.map((img) => ({ path: '/' + img }));
+            await dbx.filesDeleteBatch({
+                entries: paths
+            });
+            albumsModel.deleteOne({ _id }, {}, function (err) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send({ data: 'Record has been Deleted..!!' });
+                }
+            });
+        }
+    })
 });
 
 app.listen(3030, function () {

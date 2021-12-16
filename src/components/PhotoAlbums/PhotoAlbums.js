@@ -2,12 +2,12 @@ import { useContext, useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
 import AuthContext from '../../contexts/AuthContext';
 import Logo from "../Logo/Logo";
-import AlbumCard from "./PhotoAlbumCard";
+import PhotoAlbumCard from "./PhotoAlbumCard";
 import './photoAlbums.css';
 import Loader from '../Common/Loader/Loader';
 import AlbumPreview from '../AlbumPreview/AlbumPreview';
 
-const PhotoAlbums = ({ getFetch, postFetch, userId }) => {
+const PhotoAlbums = ({ getFetch, postFetch, userId, deletable }) => {
 
     const [albums, setAlbums] = useState([]);
     const [albumID, setAlbumID] = useState(null);
@@ -15,9 +15,9 @@ const PhotoAlbums = ({ getFetch, postFetch, userId }) => {
 
     const loadAlbums = async () => {
         let params;
-        if(isAdmin) {
+        if (isAdmin) {
             params = {};
-        } else if(userId){
+        } else if (userId) {
             params = {
                 userID
             }
@@ -31,6 +31,11 @@ const PhotoAlbums = ({ getFetch, postFetch, userId }) => {
         setLoading(false);
     }
 
+    const deleteAlbum = async (albumID) => {
+        setLoading(true);
+        await postFetch('/api/deleteAlbum', {albumID});
+        loadAlbums();
+    }
 
     const previewAlbum = (albumID) => {
         setAlbumID(albumID);
@@ -45,7 +50,7 @@ const PhotoAlbums = ({ getFetch, postFetch, userId }) => {
         loading ? <Loader />
             : albumID
                 ? <>
-                    <AlbumPreview albumID={albumID} getFetch={getFetch}/>
+                    <AlbumPreview albumID={albumID} getFetch={getFetch} />
                 </>
                 : <>
                     < Logo />
@@ -55,11 +60,13 @@ const PhotoAlbums = ({ getFetch, postFetch, userId }) => {
                             <ul className='gallery-ul'>
                                 {
                                     albums.map(({ img, albumID }) => (
-                                        <AlbumCard
+                                        <PhotoAlbumCard
                                             img={img}
                                             key={albumID}
                                             albumID={albumID}
                                             previewAlbum={previewAlbum}
+                                            deletable={deletable}
+                                            deleteAlbum={deleteAlbum}
                                         />
                                     ))
                                 }

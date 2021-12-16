@@ -66,6 +66,10 @@ function App() {
             <PhotoAlbums postFetch={postFetch} getFetch={getFetch}/>
             <Footer />
           </Route>
+          <Route path='/deleteAlbum'>
+            <PhotoAlbums postFetch={postFetch} getFetch={getFetch} deletable={true}/>
+            <Footer />
+          </Route>
           <Route path='/myAlbums'>
             <PhotoAlbums postFetch={postFetch} getFetch={getFetch} userId={user.userID}/>
             <Footer />

@@ -4,8 +4,7 @@ import AuthContext from '../../contexts/AuthContext';
 import './headerStyle.css';
 export default function Header() {
     const { user: {
-        userID,
-        isAdmin
+        userID
     }, logout } = useContext(AuthContext);
 
 
@@ -36,7 +35,7 @@ export default function Header() {
                                 <li className='active'><Link to='#home'>Начало</Link></li>
                                 <li ><Link to='#about'>За мен</Link></li>
                                 <li ><Link to='#works'>Проекти</Link></li>
-                                <li ><Link to='#partners'>Партньори</Link></li>
+                                <li ><Link to='#team'>Екип</Link></li>
                                 <li ><Link to='#contact'>Контакти</Link></li>
                             </ul>
                         </div>
