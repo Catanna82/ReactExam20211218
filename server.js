@@ -24,6 +24,7 @@ const uuid = require('uuid').v4;
 
 })();
 
+const port = process.env.PORT || 3030;
 const app = express();
 app.use(bodyParser({ limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -379,6 +380,6 @@ app.post('/api/deleteAlbum', function (req, res) {
     })
 });
 
-app.listen(3030, function () {
-    console.log('App listening on port 3030');
+app.listen(port, function () {
+    console.log(`App listening on port ${port}`);
 });

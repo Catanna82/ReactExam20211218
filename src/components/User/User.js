@@ -49,7 +49,7 @@ const User = ({ getFetch, postFetch }) => {
                         <div className='container user-profile-container'>
                             <div className='user-profile-main'>
                                 <div className='user-profile-main-topbar'>
-                                    <a className='user-profile-main-topbar-a' href='/' onClick={logout}>Изход</a>
+                                    {/* <a className='user-profile-main-topbar-a' href='/' onClick={logout}>Изход</a> */}
                                     {userID && isAdmin && <a className='user-profile-main-topbar-a' href='/messages' ><i className='far fa-envelope header-i'></i></a>}
                                 </div>
                             </div>
