@@ -53,7 +53,8 @@ const CommentsSchema = new Schema({
     userID: { type: String },
     date: { type: Date },
     msg: { type: String },
-    status: { type: String }
+    status: { type: String },
+    likes: { type: Array }
 }, { versionKey: false });
 
 const MessagesSchema = new Schema({
@@ -226,6 +227,15 @@ app.post('/api/updateComment', function (req, res) {
     })
 });
 
+app.post('/api/likes', function (req, res) {
+    commentsModel.updateOne({ _id: req.body.commentID }, {likes: req.body.likes}, {}, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(data);
+        }
+    })
+});
 app.post('/api/deleteComment', function (req, res) {
     commentsModel.deleteOne({ _id: req.body.commentID }, {}, function (err) {
         if (err) {
@@ -249,12 +259,13 @@ app.get('/api/loadComments/:status', function (req, res) {
                 if (err) {
                     res.send(err);
                 } else {
-                    res.send(data.map(({ date, msg, userID, _id, status }) => ({
+                    res.send(data.map(({ date, msg, userID, _id, status, likes }) => ({
                         date,
                         msg,
                         name: users[userID] || 'Деактивиран профил',
                         _id,
-                        status
+                        status,
+                        likes
                     })));
                 }
             });

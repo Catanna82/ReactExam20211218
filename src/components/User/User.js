@@ -108,7 +108,7 @@ const User = ({ getFetch, postFetch }) => {
                                         <a href='/addAlbum'>Добави албум</a>
                                     </li>
                                     <li className='square-li'>
-                                        <a href='/editAlbum'>Редактирай албум</a>
+                                        <a href='/deleteAlbum'>Изтрий албум</a>
                                     </li>
                                 </ul>
                             </nav>}

@@ -1,0 +1,6 @@
+.portfolio-img {
+    width: 80%;
+    position: absolute;
+    transform: translate(197px, 10px);
+    height: 98vh;
+}

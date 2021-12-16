@@ -22,6 +22,7 @@ import EditComments from './components/EditComments/EditComments';
 import Comments from './components/Comments/Comments';
 import Studio from './components/Studio/Studio';
 import Messages from './components/Messages/Messages';
+import PortfolioImg from './components/PortfolioImg/PortfolioImg';
 
 const initialAuthState = {
   userID: null,
@@ -85,6 +86,7 @@ function App() {
             <Studio />
             <Footer />
           </Route>
+          <Route path="/imageFullSize/:img" children={<PortfolioImg />} />
           <Route path='/editComment'>
             <EditComments />
             <Footer />

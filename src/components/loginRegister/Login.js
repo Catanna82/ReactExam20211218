@@ -69,9 +69,9 @@ const Login = ({ postFetch}) => {
                         <span>Парола</span>
                         <input className='login-input' onChange={onChangeHandler} name='password' type='password' value={input.password} />
                     </label>
-                    <p className={'forgot-pass'}>Забравена парола?</p>
+                    {/* <p className={'forgot-pass'}>Забравена парола?</p> */}
                     <button type='button' onClick={onSignInHandler} className={'submit'}>Вход</button>
-                    <button type='button' className={'fb-btn'}>Влез с <span>facebook</span></button>
+                    {/* <button type='button' className={'fb-btn'}>Влез с <span>facebook</span></button> */}
                 </div>
                 <div className={'sub-cont s--signup'}>
                     <div className={'img'}>
@@ -103,7 +103,7 @@ const Login = ({ postFetch}) => {
                             <input className='login-input' onChange={onChangeHandler} name='regPassword' type='password' />
                         </label>
                         <button type='button' onClick={onSignUpHandler} className={'submit'} >Регистрация</button>
-                        <button type='button' className={'fb-btn'} >Присъедини се с <span>facebook</span></button>
+                        {/* <button type='button' className={'fb-btn'} >Присъедини се с <span>facebook</span></button> */}
                     </div>
                 </div>
             </div>

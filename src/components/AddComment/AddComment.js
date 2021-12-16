@@ -30,10 +30,16 @@ const AddComment = ({ getFetch, postFetch, status }) => {
     };
     const onClickHandler = async (e) => {
         e.preventDefault();
-        await postFetch('/api/saveComment', { ...input, userID, date: Date.now() });
+        await postFetch('/api/saveComment', { ...input, userID, date: Date.now(), likes: [] });
         load();
         setInput({ msg: '' });
     };
+
+    const likeHandler = async (params) => {
+        await postFetch('/api/likes', params);
+        load();
+    };
+
     const { user: {
         userID
     } } = useContext(AuthContext);
@@ -44,7 +50,7 @@ const AddComment = ({ getFetch, postFetch, status }) => {
                 <div className='container'>
                     <div className='row'>
                         <div className='col-sm-5 col-md-6 col-12 pb-4 comment-flex'>
-                            {comments.map(({ date, msg, name, _id }, i) => {
+                            {comments.map(({ date, msg, name, _id, likes }, i) => {
                                 const style = (i % 2 === 0 && 'add-comment mt-4 text-justify float-left') ||
                                     'text-justify add-darker mt-4 float-right';
                                 return (
@@ -55,6 +61,9 @@ const AddComment = ({ getFetch, postFetch, status }) => {
                                         img='/images/profile.jpg'
                                         date={formatDate(new Date(date), 'dd/MM/yyyy')}
                                         text={msg}
+                                        commentID={_id}
+                                        likes={likes}
+                                        likeHandler={likeHandler}
                                     />
                                 );
                             })}
