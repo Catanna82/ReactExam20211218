@@ -3,8 +3,7 @@ import { useEffect, useContext, useState } from 'react';
 import Logo from '../Logo/Logo';
 import { Redirect } from 'react-router';
 import AuthContext from '../../contexts/AuthContext';
-
-import './messagesStyle.module.css';
+import './messagesStyle.css'
 
 const Messages = ({ postFetch }) => {
 

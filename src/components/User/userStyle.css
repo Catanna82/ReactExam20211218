@@ -1,5 +1,6 @@
 .user-profile-container {
     margin: 0 auto;
+    min-height: 70vh;
 }
 
 .user-profile-card-body {
@@ -29,10 +30,10 @@ aside a {
 }
 
 .user-page {
-    margin-top: 177px;
+    margin-top: 100px;
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 114px
+    margin-bottom: -13px;
 }
 
 .page-title {

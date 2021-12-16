@@ -85,7 +85,7 @@ const AlbumPreview = ({ albumID, getFetch }) => {
         album.length > 0
             ? (
                 <div className='slide-show'>
-                    <h1 className='slide-show-title'>SlideShow</h1>
+                    <h1 className='slide-show-title'>Име на албума</h1>
                     <Slideshow
                         imgs={album}
                     />

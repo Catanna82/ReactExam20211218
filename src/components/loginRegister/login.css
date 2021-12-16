@@ -10,6 +10,7 @@ input, button {
     background: none;
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
+
 .tip {
     font-size: 20px;
     margin: 40px auto 50px;
@@ -22,6 +23,7 @@ input, button {
     height: 550px;
     margin: 0 auto 100px;
     background: #fff;
+    margin-bottom: 100px;
 }
 .form {
     position: relative;
@@ -236,4 +238,6 @@ label span {
 
 .cont {
     margin-top: 33px;
+    margin-bottom: 160px;
+
 }

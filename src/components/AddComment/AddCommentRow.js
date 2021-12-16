@@ -23,7 +23,7 @@ const AddCommentRow = ({ className, name, img, text, date, likes, likeHandler, c
                 <p className='comment-p'>{text}</p>
                 </>
                 {likes && <>
-                <button className='edit-btn' onClick={likesHelper} disabled={likes.includes(userID)}>Харесай</button>
+                <button className='like-btn' onClick={likesHelper} disabled={likes.includes(userID)}>Харесай</button>
                 <div className="likes">
                     <span id="total-likes">{likes.length} </span>
                     <img className="hearts" src="/images/heart.png" alt='hearts' />

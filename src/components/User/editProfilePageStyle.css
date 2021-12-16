@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: space-around;
     margin-top: 100px;
+    margin-bottom: 45px;
 }
 
 .edit-title{
@@ -36,4 +37,58 @@
 }
 .edit-input{
     width: 100%;
+}
+
+.admin-user-profile-container {
+    margin: 106px auto;
+}
+
+.user-profile-main {
+    padding: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.user-profile-main-topbar {
+    background-color: #111111;
+    overflow: hidden;
+    width: 70%;
+}
+
+.user-profile-main-topbar-a {
+    float: right;
+    color: whitesmoke;
+    text-align: center;
+    padding: 20px 26px;
+    text-decoration: none;
+    font-size: 26px;
+}
+
+.title-p {
+    font-size: 30px;
+    margin-bottom: 0.7em;
+}
+
+.user-profile-sidebar {
+    background-color: #333;
+    color: white;
+    height: 100%;
+}
+
+.user-profile-sidebar-a {
+    margin-left: 10px;
+    display: block;
+    color: white;
+    padding-bottom: 40px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.user-profile-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-profile-card-content {
+    background-color: whitesmoke;
 }

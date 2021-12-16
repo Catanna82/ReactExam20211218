@@ -3,7 +3,6 @@ import { Redirect } from 'react-router';
 import AuthContext from '../../contexts/AuthContext';
 import Logo from '../Logo/Logo';
 import './editProfilePageStyle.css';
-import './adminProfileStyle.css';
 
 const EditProfilePage = ({
     name,
