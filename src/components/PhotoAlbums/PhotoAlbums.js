@@ -32,9 +32,11 @@ const PhotoAlbums = ({ getFetch, postFetch, userId, deletable }) => {
     }
 
     const deleteAlbum = async (albumID) => {
-        setLoading(true);
-        await postFetch('/api/deleteAlbum', {albumID});
-        loadAlbums();
+        if (window.confirm('Сигурни ли сте, че искате да изтриете този албум?')) {
+            setLoading(true);
+            await postFetch('/api/deleteAlbum', { albumID });
+            loadAlbums();
+        }
     }
 
     const previewAlbum = (albumID) => {

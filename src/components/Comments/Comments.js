@@ -10,7 +10,7 @@ import EditComments from '../EditComments/EditComments';
 const Comments = ({ getFetch, postFetch, userId, status }) => {
     const load = async () => {
         let data;
-        if(userId) {
+        if (userId) {
             data = await getFetch(`/api/loadComment/${userID}`);
         } else if (status) {
             data = await getFetch(`/api/loadComments/${status}`);
@@ -36,8 +36,10 @@ const Comments = ({ getFetch, postFetch, userId, status }) => {
         });
     };
     const onDeleteHandler = async (commentID) => {
-        await postFetch('/api/deleteComment', {commentID});
-        load();
+        if (window.confirm('Сигурни ли сте, че искате да изтриете този коментар?')) {
+            await postFetch('/api/deleteComment', { commentID });
+            load();
+        }
     };
 
     const approveComment = async (commentID) => {
@@ -90,12 +92,12 @@ const Comments = ({ getFetch, postFetch, userId, status }) => {
                         </div>
                         {
                             editComment.commentID &&
-                                <EditComments
-                                    text={editComment.text}
-                                    commentID={editComment.commentID}
-                                    onClickHandler={onClickHandler}
-                                    setEditComment={setEditComment}
-                                />
+                            <EditComments
+                                text={editComment.text}
+                                commentID={editComment.commentID}
+                                onClickHandler={onClickHandler}
+                                setEditComment={setEditComment}
+                            />
                         }
                     </div>
                 </div>

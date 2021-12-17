@@ -17,7 +17,7 @@
 
 .my-comp-cont {
     margin-top: 100px;
-    margin-bottom: -60px;
+    /* margin-bottom: -60px; */
     min-height: 75vh;
 }
 

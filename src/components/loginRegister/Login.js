@@ -4,7 +4,7 @@ import './login.css';
 import Logo from '../Logo/Logo';
 import AuthContext from '../../contexts/AuthContext';
 
-const Login = ({ postFetch}) => {
+const Login = ({ postFetch }) => {
     let historyHook = useHistory();
     const { login } = useContext(AuthContext);
     const initialState = {
@@ -14,8 +14,22 @@ const Login = ({ postFetch}) => {
         regPassword: '',
         regName: ''
     };
+    const initialLoginState = {
+        email: '',
+        password: ''
+    };
+    const initialRegisterState = {
+        regEmail: '',
+        regPassword: '',
+        regName: ''
+    };
     const [isSignUp, setState] = useState(true);
     const [input, setInput] = useState(initialState);
+    const [errors, setErrors] = useState({
+        ...initialLoginState,
+        ...initialRegisterState
+    });
+
     const changeView = () => {
         setState(!isSignUp);
         setInput(initialState);
@@ -29,30 +43,96 @@ const Login = ({ postFetch}) => {
             };
         });
     };
-    const onSignUpHandler = (e) => {
+    const onSignUpHandler = async (e) => {
         e.preventDefault();
         console.log(input);
         const { regEmail, regPassword, regName } = input;
-        const data = {
-            email: regEmail,
-            password: regPassword,
-            name: regName
-        };
-        postFetch('/api/SaveUser', data);
-        historyHook.push('/');
+        const catchErrors = {};
+        const removeErrors = {};
+
+        if (!regName) {
+            catchErrors.regName = 'Потребителското име е задължително!';
+        } else {
+            removeErrors.regName = '';
+        }
+        if (!regPassword) {
+            catchErrors.regPassword = 'Паролата е задължителна!';
+        } else if (regPassword.length < 6) {
+            catchErrors.regPassword = 'Паролата трябва да е минимум 6 символа!';
+        } else {
+            removeErrors.regPassword = '';
+        }
+        if (!regEmail) {
+            catchErrors.regEmail = 'Въведете електронна поща!';
+        } else if (!regEmail.match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)) {
+            catchErrors.regEmail = 'Въведете валидна електронна поща!';
+        } else {
+            removeErrors.regEmail = '';
+        }
+
+        if (Object.keys(catchErrors).length > 0) {
+            setErrors({
+                ...errors,
+                ...catchErrors,
+                ...removeErrors
+            })
+        } else {
+            const data = {
+                email: regEmail,
+                password: regPassword,
+                name: regName
+            };
+            const registerFetch = await postFetch('/api/SaveUser', data);
+            if (registerFetch.regEmail) {
+                setErrors({
+                    ...initialLoginState,
+                    ...initialRegisterState,
+                    ...registerFetch
+                })
+            } else {
+                historyHook.push('/');
+            }
+        }
     }
     const onSignInHandler = async (e) => {
         e.preventDefault();
         console.log(input);
         const { email, password } = input;
-        const data = {
-            email,
-            password
-        };
-        const userData = await postFetch('/api/login', data);
-        console.log(userData);
-        login(userData);
-        historyHook.push('/');
+        const catchErrors = {};
+        const removeErrors = {};
+        if (!password) {
+            catchErrors.password = 'Паролата е задължителна!';
+        } else {
+            removeErrors.password = '';
+        }
+        if (!email) {
+            catchErrors.email = 'Въведете електронна поща!';
+        } else {
+            removeErrors.email = '';
+        }
+        if (Object.keys(catchErrors).length > 0) {
+            setErrors({
+                ...errors,
+                ...catchErrors,
+                ...removeErrors
+            })
+        } else {
+            const data = {
+                email,
+                password
+            };
+            const userData = await postFetch('/api/login', data);
+            if (userData.password) {
+                setErrors({
+                    ...initialLoginState,
+                    ...initialRegisterState,
+                    ...userData
+                })
+            } else {
+                login(userData);
+                historyHook.push('/');
+            }
+        }
     }
 
     return (
@@ -64,10 +144,12 @@ const Login = ({ postFetch}) => {
                     <label>
                         <span>Електронна поща</span>
                         <input className='login-input' onChange={onChangeHandler} name='email' type='email' value={input.email} />
+                        <div className='error'>{errors.email}</div>
                     </label>
                     <label>
                         <span>Парола</span>
                         <input className='login-input' onChange={onChangeHandler} name='password' type='password' value={input.password} />
+                        <div className='error'>{errors.password}</div>
                     </label>
                     {/* <p className={'forgot-pass'}>Забравена парола?</p> */}
                     <button type='button' onClick={onSignInHandler} className={'submit'}>Вход</button>
@@ -93,14 +175,17 @@ const Login = ({ postFetch}) => {
                         <label>
                             <span>Име</span>
                             <input className='login-input' onChange={onChangeHandler} name='regName' type='text' />
+                            <div className='error'>{errors.regName}</div>
                         </label>
                         <label>
                             <span>Електронна поща</span>
                             <input className='login-input' onChange={onChangeHandler} name='regEmail' type='email' />
+                            <div className='error'>{errors.regEmail}</div>
                         </label>
                         <label>
                             <span>Парола</span>
                             <input className='login-input' onChange={onChangeHandler} name='regPassword' type='password' />
+                            <div className='error'>{errors.regPassword}</div>
                         </label>
                         <button type='button' onClick={onSignUpHandler} className={'submit'} >Регистрация</button>
                         {/* <button type='button' className={'fb-btn'} >Присъедини се с <span>facebook</span></button> */}

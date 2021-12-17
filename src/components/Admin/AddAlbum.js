@@ -9,9 +9,14 @@ import AuthContext from '../../contexts/AuthContext';
 
 const Admin = ({ postFetch, getFetch }) => {
     let history = useHistory();
+    const initialErrorAlbumState = {
+        images: '',
+        albumName: ''
+    }
     const [images, setImages] = useState([]);
     const [category, setCategory] = useState('');
     const [albumName, setAlbumName] = useState('');
+    const [errors, setErrors] = useState(initialErrorAlbumState);
     const [userID, setUserID] = useState('');
     const [userNames, setUserNames] = useState([]);
 
@@ -42,15 +47,40 @@ const Admin = ({ postFetch, getFetch }) => {
         await readFile(0);
     }
 
-    const uploadImages = (e) => {
+    const uploadImages = async (e) => {
         e.preventDefault();
-        postFetch('/api/saveAlbums', {
-            albumName: albumName,
-            category: category,
-            images: images,
-            userID: userID
-        });
-        history.push('/');
+        const errorState = {};
+        if (!albumName) {
+            errorState.albumName = 'Името на албума е задължително!';
+        }
+        if (images.length === 0) {
+            errorState.images = 'Изберете снимки за качване!';
+        }
+        if (Object.keys(errorState).length > 0) {
+            setErrors({
+                ...initialErrorAlbumState,
+                ...errorState
+            })
+        } else {
+            const albumFetch = await postFetch('/api/saveAlbums', {
+                albumName: albumName,
+                category: category,
+                images: images,
+                userID: userID
+            });
+            if (albumFetch.albumName) {
+                setErrors({
+                    ...initialErrorAlbumState,
+                    ...albumFetch
+                })
+            } else {
+                history.push('/');
+            }
+        }
+    }
+
+    const cancelHandler = () => {
+        history.push('/addAlbum');
     }
 
     const changeCategory = (e) => {
@@ -84,6 +114,7 @@ const Admin = ({ postFetch, getFetch }) => {
                                         <p>
                                             Име на албума:
                                             <input className='album-name-input' type='text' name='albumName' id='albumName' value={albumName} onChange={changeAlbumName} />
+                                            <div className='error'>{errors.albumName}</div>
                                         </p>
                                     </div>
                                     <div className='flex'>
@@ -101,6 +132,7 @@ const Admin = ({ postFetch, getFetch }) => {
                                     </div>
                                     <form id='upload-form' className='admin' method='POST'>
                                         <input className='admin-add-img' type='file' id='images' name='images' multiple onChange={chooseUploadImg} />
+                                        <div className='error'>{errors.images}</div>
                                     </form>
                                     <div className='flex'>
                                         <p>
@@ -120,7 +152,7 @@ const Admin = ({ postFetch, getFetch }) => {
                                             </select>
                                         </p>
                                     </div>
-                                    <button className='admin-btn' >Отхвърли</button>
+                                    <button className='admin-btn' onClick={cancelHandler}>Отхвърли</button>
                                     <button className='admin-btn' onClick={uploadImages} >Запази</button>
                                 </div>
                             </div>

@@ -10,7 +10,8 @@
     justify-content: center;
     align-content: center;
     align-items: center;
-    margin-top: 72px;
+    margin-top: 68px;
+    min-height: 72vh
   }
 
   .slideshow {
@@ -19,7 +20,7 @@
 
   .mainImg-container {
     width: 100%;
-    margin: 15px;
+    margin: 15px 15px 25px 15px;
   }
 
   .tumbnail {
@@ -32,11 +33,12 @@
   }
 
   .slideshow-actions {
-    position: absolute;
+    /* position: absolute; */
     top: 50%;
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-top: 30px;
   }
 
   .slideshowactions .slideshow-button {

@@ -63,14 +63,14 @@ const AlbumPreview = ({ albumID, getFetch }) => {
             <>
                 <Logo />
                 <div className='slideshow'>
+                    <div className='slideshow-actions'>
+                        <button className='slideshow-button' onClick={prev}>👈</button>
+                        <button className='slideshow-button' onClick={next}>👉</button>
+                    </div>
                     <div className='mainImg-container'>
                         <a href={imgs[index]} download={index}>
                             <img className='mainImg' src={imgs[index]} alt='not found' />
                         </a>
-                    </div>
-                    <div className='slideshow-actions'>
-                        <button className='slideshow-button' onClick={prev}>👈</button>
-                        <button className='slideshow-button' onClick={next}>👉</button>
                     </div>
                     <Thumbnail arr={imgs} image={setIndex} index={index} />
                 </div>
@@ -85,7 +85,6 @@ const AlbumPreview = ({ albumID, getFetch }) => {
         album.length > 0
             ? (
                 <div className='slide-show'>
-                    <h1 className='slide-show-title'>Име на албума</h1>
                     <Slideshow
                         imgs={album}
                     />

@@ -5,6 +5,9 @@ body {
 	font: 300 15px/15px Roboto, Arial, Helvetica;
 	-webkit-font-smoothing: antialiased;
 }
+.error {
+	color: #ff0000;
+}
 
 .logo {
 	padding-top: 10px;

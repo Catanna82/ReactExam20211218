@@ -59,10 +59,9 @@ const AddCommentBtns = ({
 
     return (
         <div className='user-author-btn'>
-            {userID && isAdmin
+            {userID && isAdmin && status === 'pending'
                 ? <>
-                    {status === 'pending' && <AdminBtn />}
-                    <UserBtn />
+                    <AdminBtn />
                 </>
                 : <UserBtn />
             }

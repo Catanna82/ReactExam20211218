@@ -28,9 +28,11 @@ const User = ({ getFetch, postFetch }) => {
     }
 
     const deleteUserProfile = async () => {
-        await postFetch('/api/deleteUser', { userID });
-        logout();
-        history.push('/');
+        if (window.confirm('Сигурни ли сте, че искате да изтриете профила си?')) {
+            await postFetch('/api/deleteUser', { userID });
+            logout();
+            history.push('/');
+        }
     }
 
     return userID ? (

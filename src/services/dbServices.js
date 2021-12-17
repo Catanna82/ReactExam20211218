@@ -1,4 +1,4 @@
-const URL = 'https://jan-photo-site-server.herokuapp.com/';
+const URL = 'https://jan-photo-site-server.herokuapp.com';
 
 const getFetch = (uri) => {
     return fetch(URL + uri)
