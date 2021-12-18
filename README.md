@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# This is a photo app, created in React. It displays a set of images, albums, portfolio and comments area.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a web site for Jan Todorov photography.
 
-## Available Scripts
+## Architecture
 
-In the project directory, you can run:
+### Site functionality:
 
-### `npm start`
+- Home page - About page, Contacts page, Team page, Work page
+- Album pages - Album Preview, Download images, Upload Images page, Delete Album
+- Login/Register page
+- Comments pages - Add Comment /Add Comments page/, Edit and Delete Comment /My Comments page/, approve and reject comments /Admin profile page/, Likes
+- User/Admin page - edit and delete profile
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### User roles:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Admin - can access all functionality
+- User - can access Add Comments, Photo Albums and Comments pages
+- Guest - can access Home, Login/Register
 
-### `npm test`
+### Used technologies and modules:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- react
+- uuid
+- mongoose
+- express
+- firebase
+- dropbox
+- Heroku
+- MongoDB Atlas
 
-### `npm run build`
+### Prerequisites:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- node js version 14+
+- npm version 7+
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Images storage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+All images are stored in dropbox.
 
-### `npm run eject`
+## Installation, startup and application access:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Install modules from package.json
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```console
+npm i 
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Start node server
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+__Server can be downloaded from: *https://github.com/Catanna82/Server*__
 
-## Learn More
+```console
+node server.js
+```
+__NOTE: Server is deployed in heroku and can be accessed here: *https://jan-photo-site-server.herokuapp.com*__
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Start app
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```console
+npm run start
+```
 
-### Code Splitting
+### Open a browser window and navigate to
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+http://localhost:3000/
 
-### Analyzing the Bundle Size
+__NOTE: This app is deployed in firebase and can be accessed here: *https://janphotosite.web.app/*__
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## User interfaces
 
-### Making a Progressive Web App
+### User managment:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Register button - If you want to use user profile just click on register button, and create a new user profile. First registered user gets the private (admin) profile.
+- Login button - Get access to user functionality (only for registered users).

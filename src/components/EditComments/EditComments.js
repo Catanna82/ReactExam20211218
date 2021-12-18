@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import AuthContext from '../../contexts/AuthContext';
 import '../Comments/myComment.css';
 
-const EditComments = ({ postFetch, text, commentID, onClickHandler, setEditComment }) => {
+const EditComments = ({ text, commentID, onClickHandler, setEditComment }) => {
     const onChangeHandler = (e) => {
         e.preventDefault();
         const { value } = e.target;
