@@ -1,6 +1,7 @@
 import { format as formatDate } from 'date-fns'
 import { useEffect, useContext, useState } from 'react';
 import Logo from '../Logo/Logo';
+import Footer from '../Footer/Footer';
 import './addComment.css';
 import AddCommentRow from './AddCommentRow';
 import { Redirect } from 'react-router';
@@ -83,6 +84,7 @@ const AddComment = ({ getFetch, postFetch, status }) => {
                     </div>
                 </div>
             </section>
+            <Footer />
         </>
     )
         : <Redirect to='/' />

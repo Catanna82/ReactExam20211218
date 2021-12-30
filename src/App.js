@@ -76,7 +76,7 @@ function App() {
           </Route>
           <Route path='/addAlbum'>
             <AddAlbum postFetch={postFetch} getFetch={getFetch} />
-            <Footer />
+            {/* <Footer /> */}
           </Route>
           <Route path='/messages'>
             <Messages postFetch={postFetch} />
